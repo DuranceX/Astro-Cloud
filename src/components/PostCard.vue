@@ -1,6 +1,6 @@
 <template>
-    <div class="w-full h-60 bg-[--card-background-color] rounded-2xl my-5 text-[--font-color] px-10 py-6">
-        <div name="title-bar" class=" font-bold text-3xl before:content-['|'] before:font-bold before:text-[--primary] before:translate-x-[-10px]">
+    <div class="w-full h-60 bg-[--card-background-color] rounded-2xl my-5 text-[--font-color] px-10 py-6 shadow-sm hover:translate-y-[-12px] transition-transform">
+        <div name="title-bar" class="relative font-bold text-3xl ">
             <a :href="url">{{ post.title }}</a>
         </div>
         <div name="extra-info">
