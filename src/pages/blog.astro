@@ -1,22 +1,13 @@
 ---
-import Navbar from '../components/Navbar.vue'
+import BaseLayout from "../layouts/BaseLayout.astro";
+const allPosts = await Astro.glob('./posts/*.md');
 const title = "博客";
 ---
 
-<html lang = "zh">
-  <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width" />
-    <title>Astro</title>
-  </head>
-  <body>
-
-    <Navbar />
-    <h1>{title}</h1>
-    <p>这是我的 Astro 学习笔记</p>
-    <ul>
-      <li><a href="/posts/post1/">文章 1</a></li>
-      <li><a href="/posts/图片下方出现空行的成因和解决方案/">图片下方出现空行的成因和解决方案</a></li>
-    </ul>
-  </body>
-</html>
+<BaseLayout pageTitle="Blog">
+  <h1>{title}</h1>
+  <p>这是我的 Astro 学习笔记</p>
+  <ul>
+    {allPosts.map((post) => <li><a class="link-default" href={post.url}>{post.frontmatter.title}</a></li>)}
+  </ul>
+</BaseLayout>

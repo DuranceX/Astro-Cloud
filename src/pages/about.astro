@@ -1,17 +1,7 @@
 ---
-import Navbar from '../components/Navbar.vue'
+import BaseLayout from "../layouts/BaseLayout.astro"
 ---
 
-<html lang="zh-cn">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type ="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content = {Astro.generator} >
-    <title>Astro</title>
-  </head>
-  <body>
-    <Navbar />
-    <h1>Astro</h1>
-  </body>
-</html>
+<BaseLayout pageTitle="About">
+  <h1 class="bg-[--primary-light]">about</h1>
+</BaseLayout>
