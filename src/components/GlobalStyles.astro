@@ -13,32 +13,43 @@ $color-theme: 200;
     @return hsl($color-theme,100, $l / $a); 
 }
 
-:root {
-    --primary: #{ct()};
-    --primary-light: #{ct(80)};
-    --menu-item-bg: #{ct(97)};
-    --menu-item-bg-active: #{ct(90)};
-    --background-color: hsl(#{$color-theme+20}, 40%,94%);
-    --card-background-color: #{white()};
-    --font-color: #{black()};
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary: #{ct(48)};
+        --primary-light: #{ct(50)};
+        --menu-item-bg: hsl(#{$color-theme+20}, 40%,10%);
+        --menu-item-bg-active: #{ct(40)};
+        --background-color: #{black(10)};
+        --card-background-color: hsl(#{$color-theme+20}, 15%,15%);
+        --nav-background-color: hsl(#{$color-theme+20}, 15%,15%);
+        --font-color: #{white(90)};
+        --sub-font-color: #{white(70)};
+    }
 }
 
-:root.dark{
-
+@media (prefers-color-scheme: light) {
+    :root {
+        --primary: #{ct()};
+        --primary-light: #{ct(80)};
+        --menu-item-bg: hsl(#{$color-theme}, 40%,95%);
+        --menu-item-bg-active: #{ct(90)};
+        --background-color: hsl(#{$color-theme+20}, 40%,95%);
+        --card-background-color: #{white()};
+        --nav-background-color: #{white()};
+        --font-color: #{black()};
+        --sub-font-color: #{black(50)};
+    }
 }
+
+:root{
+    transition: all 0.3s;
+}
+
 
 html {
     font-family: system-ui, sans-serif;
     background: var(--background-color);
     color: var(--font-color);
-}
-
-a{
-    color: var(--primary);
-    text-decoration: none;
-    &:hover{
-        text-decoration: underline;
-    }
 }
 
 code {
@@ -52,7 +63,9 @@ code {
         Courier New,
         monospace;
 }
+</style>
 
+<style is:global>
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

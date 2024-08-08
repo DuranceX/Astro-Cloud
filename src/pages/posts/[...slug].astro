@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MarkdownLayout from '@/layouts/MarkdownLayout.astro';
+import { getPosts } from '@/utils/collections';
+
+export async function getStaticPaths() {
+	return (await getPosts()).map((post) => ({
+		params: { slug: post.slug },
+		props: { post },
+	}));
+}
+
+const { post } = Astro.props;
+---
+<BaseLayout pageTitle={post.data.title}>
+  <MarkdownLayout post={post}/>
+</BaseLayout>

@@ -1,13 +1,23 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro"
-import HomePage from "@/components/HomePage.vue"
+import PostCard from "@/components/PostCard.vue";
+import { getPosts } from "@/utils/collections"
+import { getTagColor,setTags } from "@/constants/tagColor"
 
-const allPosts = await Astro.glob('./posts/*.md');
+const posts = await getPosts();
+
+const tags = [...new Set(posts.map(entry => entry.data.tags).flat())];
+let colorfulTags:any = {}
+tags.forEach((tag,i) => {
+	colorfulTags[tag] = getTagColor()[i % (Object.keys(getTagColor()).length / 2)]
+})
+setTags(colorfulTags)
+
 ---
 <BaseLayout pageTitle="Home">
-	<div class="flex flex-col justify-center items-center">
-		<HomePage posts={allPosts}/>
-	</div>
+	<div class="flex flex-col py-60 w-5/6 md:w-3/4 2xl:w-1/2">
+        {posts.map((post) => <PostCard post={post}></PostCard>)}
+    </div>
 </BaseLayout>
 
 <style>

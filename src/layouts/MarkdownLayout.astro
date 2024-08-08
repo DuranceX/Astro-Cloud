@@ -1,13 +1,13 @@
 ---
-import BaseLayout from "./BaseLayout.astro"
-const {frontmatter} = Astro.props
+const { post } = Astro.props
+const data = post.data
 ---
-<BaseLayout pageTitle={frontmatter.title}>
-    <h1>{frontmatter.title}</h1>
-    <p>Written by {frontmatter.author}</p>
-    {frontmatter}
-    <slot />
-</BaseLayout>
+
+<h1>{data.title}</h1>
+<p>Written by {data.author}</p>
+
+{post.body}
+<slot />
 
 <style>
 
