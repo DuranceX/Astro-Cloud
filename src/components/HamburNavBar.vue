@@ -2,11 +2,11 @@
     <div class="flex flex-col w-full text-slate-800">
         <div class="h-12 flex flex-row justify-between items-center bg-white rounded-b-md px-6">
             <div class="flex items-center">
-                <img class="w-10 h-10" src="../../public/favicon.svg">
+                <img class="w-10 h-10" src="../assets/icons/favicon.svg">
                 <span>Title</span>
             </div>
             <div class="flex items-center" @click="isShowMenu = !isShowMenu">
-                <img class="w-10 h-10" src="../../public/favicon.svg">
+                <img class="w-10 h-10" src="../assets/icons/favicon.svg">
                 <span>Switch</span>
             </div>
         </div>
