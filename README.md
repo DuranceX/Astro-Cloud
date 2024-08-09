@@ -52,3 +52,11 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+
+## TODO
+
+- [x] 主页移动端适配
+- [ ] 标签页面
+- [ ] 文章页面
+- [ ] 置顶功能
+- [ ] ...

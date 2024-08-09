@@ -17,7 +17,7 @@ setTags(colorfulTags)
 ---
 <BaseLayout pageTitle="Home">
 	<CoverCard />
-	<div class="flex flex-col w-5/6 md:w-3/4 2xl:w-1/2">
+	<div class="flex flex-col card-width">
         {posts.map((post) => <PostCard post={post}></PostCard>)}
     </div>
 </BaseLayout>

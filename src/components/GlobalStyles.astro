@@ -1,16 +1,22 @@
 <style lang="scss">
 $color-theme: 200;
 
-@function white($l:100, $a:1){
-    @return hsl($color-theme,0, $l / $a); 
+@function white($l:100){
+    @return hsl($color-theme 0  $l); 
 }
 
-@function black($l:0, $a:1){
-    @return hsl($color-theme,0 ,$l / $a); 
+@function black($l:0){
+    @return hsl($color-theme 0  $l); 
 }
 
-@function ct($l:50, $a:1){
-    @return hsl($color-theme,100, $l / $a); 
+@function ct($l:50){
+    @return hsl($color-theme 100 $l); 
+}
+
+:root{
+    --font-mask-color: #{white(85)};
+    --font-mask-sub-color: #{white(75)};
+    --bg-mask-color: hsl(200 0 0 / 0.25); 
 }
 
 @media (prefers-color-scheme: dark) {
@@ -79,6 +85,9 @@ code {
         &:hover{
             text-decoration: underline;
         }
+    }
+    .card-width{
+        @apply w-5/6 md:w-3/4 xl:w-2/3 2xl:w-1/2
     }
 }
 </style>
