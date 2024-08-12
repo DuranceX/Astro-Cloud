@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full bg-[--card-background-color] rounded-2xl my-5 text-[--font-color] shadow-sm hover:translate-y-[-12px] transition-transform duration-300 relative">
+    <div class="w-full card-style my-5 text-[--font-color] hover:translate-y-[-12px] transition-transform duration-300 relative">
         <div v-if="post.image" class="w-full flex justify-center">
             <div name="image" class=" max-h-64 flex justify-center items-center mt-4 mx-4 rounded-2xl overflow-hidden ">
             <img :src="post.image.url" :alt="post.image?.alt" class=" object-cover"/>
@@ -17,7 +17,7 @@
                 {{ description }}
             </div>
             <div name="tag-bar" class="flex flex-wrap">
-                <Tag v-for="(tag, index) in post.tags" :key="tag" :tag="tag" :index="index" />
+                <Tag v-for="(tag) in post.tags" :key="tag" :tag="tag"/>
             </div>
         </div>
     </div>

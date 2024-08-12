@@ -10,7 +10,7 @@ $color-theme: 200;
 }
 
 @function ct($l:50){
-    @return hsl($color-theme 100 $l); 
+    @return hsla($color-theme 100 $l); 
 }
 
 :root{
@@ -23,6 +23,7 @@ $color-theme: 200;
     :root {
         --primary: #{ct(48)};
         --primary-light: #{ct(50)};
+        --primary-dark: #{ct(35)};
         --menu-item-bg: hsl(#{$color-theme+20}, 40%,10%);
         --menu-item-bg-active: #{ct(40)};
         --background-color: #{black(10)};
@@ -30,6 +31,10 @@ $color-theme: 200;
         --nav-background-color: hsl(#{$color-theme+20}, 15%,15%);
         --font-color: #{white(90)};
         --sub-font-color: #{white(70)};
+        --font-quote-color: #{black(60)};
+        --font-quote-source-color: #{black(50)};
+        --inline-code-bg-color: #{ct(12)};
+        --inline-code-text-color: #{ct(40)};
     }
 }
 
@@ -37,6 +42,7 @@ $color-theme: 200;
     :root {
         --primary: #{ct()};
         --primary-light: #{ct(80)};
+        --primary-dark: #{ct(38)};
         --menu-item-bg: hsl(#{$color-theme}, 40%,95%);
         --menu-item-bg-active: #{ct(90)};
         --background-color: hsl(#{$color-theme+20}, 40%,95%);
@@ -46,6 +52,8 @@ $color-theme: 200;
         --sub-font-color: #{black(50)};
         --font-quote-color: #{black(60)};
         --font-quote-source-color: #{black(50)};
+        --inline-code-bg-color: #{ct(97)};
+        --inline-code-text-color: #{ct(44)};
     }
 }
 
@@ -79,15 +87,12 @@ code {
 @tailwind utilities;
 
 @layer components{
-    .link-default{
-        color: var(--primary);
-        text-decoration: none;
-        &:hover{
-            text-decoration: underline;
-        }
-    }
     .card-width{
         @apply w-5/6 md:w-3/4 xl:w-2/3 2xl:w-1/2
+    }
+
+    .card-style{
+        @apply bg-[--card-background-color] rounded-2xl shadow-sm
     }
 }
 </style>

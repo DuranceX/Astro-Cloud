@@ -7,7 +7,7 @@
 <script lang="ts" setup>
 import { getTags } from '@/constants/tagColor';
 const props = defineProps<{
-    tag: string,
+    tag: string
 }>();
 
 const tagClass = getTags()[props.tag];
