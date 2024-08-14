@@ -1,6 +1,23 @@
 # base
-sitename: "My Site"
+sitename: "Cloud Demo"
 author: "Cardy"
 ## 色相值，0-360 
-primary_color: 100
-test: "test"
+primary_color: 200
+cover: "/public/cover.jpg"
+logo: "/public/favicon.svg"
+quote_card_content: "希望你今后的每一次笑，都是真心的。"
+quote_card_source: "-- 南河「深海」"
+
+
+# menu
+menu:
+  - name: "首页"
+    url: "/"
+  - name: "归档"
+    url: "/archives"
+  - name: "关于"
+    url: "/about"
+  - name: "友链"
+    url: "/links"
+  - name: "留言"
+    url: "/message"

@@ -1,0 +1,45 @@
+---
+import { config } from '@/store/config';
+
+const links = config.menus
+const logo = config.logo
+const sitename = config.sitename
+---
+
+<div class="sm:hidden">
+    <div class="flex flex-col w-full text-slate-800">
+        <div class="h-12 flex flex-row justify-between items-center bg-white rounded-b-md px-6">
+            <div class="flex items-center">
+                <img class="w-10 h-10" src={logo}>
+                <span>{sitename}</span>
+            </div>
+            <div id="switch" class="flex items-center">
+                <img class="w-10 h-10" src="../assets/icons/favicon.svg">
+                <span>Switch</span>
+            </div>
+        </div>
+        <div id="menuPanel" class="absolute top-12 w-full shadow-lg bg-[--menu-item-bg]" style="display: none;">
+            {links.map((link:any) => (
+                <div class="h-12 bg-[--menu-item-bg] active:bg-[--menu-item-bg-active]">
+                    <a class="px-2 w-full h-full text-center flex items-center justify-center" href={link.url}>{link.name}</a>
+                </div>
+            ))}
+        </div>
+    </div>
+</div>
+
+<script>
+    let isShowMenu = true
+    const menuPanel = document.getElementById('menuPanel') as HTMLElement;
+    const switchBtn = document.getElementById('switch') as HTMLElement;
+    switchBtn.addEventListener('click', toggleMenuPanel)
+    function toggleMenuPanel() {
+        isShowMenu = !isShowMenu
+        if(isShowMenu){
+            menuPanel.style.display = 'none'
+        }else{
+            menuPanel.style.display = 'block'
+        }
+    }
+</script>
+

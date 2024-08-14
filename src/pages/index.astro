@@ -3,8 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro"
 import PostCard from "@/components/PostCard.vue";
 import { getPosts } from "@/utils/collections"
 import { getTagColor,setTags } from "@/utils/tagColor"
-import CoverCard from "@/components/CoverCard.vue";
-import { config } from "@/utils/config"
+import CoverCard from "@/components/CoverCard.astro";
 
 const posts = await getPosts();
 
@@ -17,7 +16,7 @@ setTags(colorfulTags)
 ---
 <BaseLayout pageTitle="Home">
 	<CoverCard />
-	{JSON.stringify(config)}
+	<!-- {JSON.stringify(config)} -->
 	<div class="flex flex-col card-width">
         {posts.map((post) => <PostCard post={post}></PostCard>)}
     </div>

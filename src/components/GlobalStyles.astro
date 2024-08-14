@@ -6,8 +6,8 @@
 // const configPath = 'config.yaml';
 // const config = yaml.load(readFileSync(configPath, 'utf8'));
 // const primaryColor = config['primary_color']
-import { config } from '../utils/config'
-const primaryColor = config.baseConfig.primaryColor
+import { config } from '../store/config'
+const primaryColor = config.primaryColor
 ---
 <script define:vars={{primaryColor}}>
     const r = document.querySelector(':root')
