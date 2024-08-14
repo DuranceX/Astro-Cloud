@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import { getTags } from '@/constants/tagColor';
+import { getTags } from '@/utils/tagColor';
 const props = defineProps<{
     tag: string
 }>();

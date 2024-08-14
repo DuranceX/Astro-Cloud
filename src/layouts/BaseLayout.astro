@@ -24,7 +24,7 @@ const { pageTitle } = Astro.props
 			<slot />
 		</div>
         <Footer />
-        <GlobalStyles />
+        <GlobalStyles client:load/>
 	</body>
 </html>
 

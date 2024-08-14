@@ -1,19 +1,36 @@
-<style lang="scss">
-$color-theme: 200;
+---
+// import { readFileSync } from 'fs';
+// import yaml from 'js-yaml';
 
+// // 读取 config.yaml 文件
+// const configPath = 'config.yaml';
+// const config = yaml.load(readFileSync(configPath, 'utf8'));
+// const primaryColor = config['primary_color']
+import { config } from '../utils/config'
+const primaryColor = config.baseConfig.primaryColor
+---
+<script define:vars={{primaryColor}}>
+    const r = document.querySelector(':root')
+    r.style.setProperty('--colorTheme', String(primaryColor))
+    r.style.setProperty('--colorThemeBg', String(primaryColor + 20))
+</script>
+
+<style lang="scss">
 @function white($l:100){
-    @return hsl($color-theme 0  $l); 
+    @return hsl(var(--colorTheme) 0% $l * 1%); 
 }
 
 @function black($l:0){
-    @return hsl($color-theme 0  $l); 
+    @return hsl(var(--colorTheme) 0%  $l * 1%); 
 }
 
 @function ct($l:50){
-    @return hsla($color-theme 100 $l); 
+    @return hsl(var(--colorTheme) 100% $l * 1%); 
 }
 
 :root{
+    --colorTheme: 200;
+    --colorThemeBg: 220;
     --font-mask-color: #{white(85)};
     --font-mask-sub-color: #{white(75)};
     --bg-mask-color: hsl(200 0 0 / 0.25); 
@@ -24,11 +41,11 @@ $color-theme: 200;
         --primary: #{ct(48)};
         --primary-light: #{ct(50)};
         --primary-dark: #{ct(35)};
-        --menu-item-bg: hsl(#{$color-theme+20}, 40%,10%);
+        --menu-item-bg: hsl(var(--colorThemeBg), 40%,10%);
         --menu-item-bg-active: #{ct(40)};
         --background-color: #{black(10)};
-        --card-background-color: hsl(#{$color-theme+20}, 15%,15%);
-        --nav-background-color: hsl(#{$color-theme+20}, 15%,15%);
+        --card-background-color: hsl(var(--colorThemeBg), 15%,15%);
+        --nav-background-color: hsl(var(--colorThemeBg), 15%,15%);
         --font-color: #{white(90)};
         --sub-font-color: #{white(70)};
         --font-quote-color: #{black(60)};
@@ -43,9 +60,9 @@ $color-theme: 200;
         --primary: #{ct()};
         --primary-light: #{ct(80)};
         --primary-dark: #{ct(38)};
-        --menu-item-bg: hsl(#{$color-theme}, 40%,95%);
+        --menu-item-bg: hsl(var(--colorTheme), 40%,95%);
         --menu-item-bg-active: #{ct(90)};
-        --background-color: hsl(#{$color-theme+20}, 40%,95%);
+        --background-color: hsl(var(--colorThemeBg), 40%,95%);
         --card-background-color: #{white()};
         --nav-background-color: #{white()};
         --font-color: #{black()};

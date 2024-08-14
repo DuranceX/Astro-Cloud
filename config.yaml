@@ -1,0 +1,6 @@
+# base
+sitename: "My Site"
+author: "Cardy"
+## 色相值，0-360 
+primary_color: 100
+test: "test"

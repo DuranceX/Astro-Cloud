@@ -4,7 +4,7 @@
         <div class=" w-96 bg-[--card-background-color] shadow-lg absolute bottom-[-70px] left-20 rounded-2xl quote-card">
             <div class="text-center m-8">
                 <!-- content -->
-                <div id="content" class=" font-normal text-lg italic mt-4 mb-8 z-10 relative min-h-24 flex justify-center items-center text-[--font-quote-color]" >
+                <div id="content" class=" font-normal text-lg italic mt-4 mb-8 relative min-h-24 flex justify-center items-center text-[--font-quote-color]" >
                     {{ content }}
                 </div>
                 <!-- source -->
@@ -48,7 +48,6 @@ const source = '-- 南河「深海」'
     width: 100%;
     height: 100%;
     transform: translate(-50%, -50%);
-    z-index: -5;
     opacity: 0.05;
     background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 70" width="70" height="70"><rect x="0" y="40" width="30" height="30"></rect><path d="M 0 40 q 0 -40 30 -40 v 15 q -15 0 -15 25"></path><rect x="40" y="40" width="30" height="30"></rect><path d="M 40 40 q 0 -40 30 -40 v 15 q -15 0 -15 25"></path></svg>'),
     url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 70" width="70" height="70" transform="rotate(180)"><rect x="0" y="40" width="30" height="30"></rect><path d="M 0 40 q 0 -40 30 -40 v 15 q -15 0 -15 25"></path><rect x="40" y="40" width="30" height="30"></rect><path d="M 40 40 q 0 -40 30 -40 v 15 q -15 0 -15 25"></path></svg>');

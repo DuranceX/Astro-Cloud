@@ -5,6 +5,12 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
-    }
+    },
+    "types": [
+      "node"
+    ],
+    "typeRoots": [
+      "node_modules/@types"
+    ]
   }
 }
