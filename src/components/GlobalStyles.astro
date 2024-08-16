@@ -1,13 +1,6 @@
 ---
-// import { readFileSync } from 'fs';
-// import yaml from 'js-yaml';
-
-// // 读取 config.yaml 文件
-// const configPath = 'config.yaml';
-// const config = yaml.load(readFileSync(configPath, 'utf8'));
-// const primaryColor = config['primary_color']
-import { config } from '../store/config'
-const primaryColor = config.primaryColor
+import Config from '@/store/config'
+const primaryColor = Config.getConfig().primaryColor
 ---
 <script define:vars={{primaryColor}}>
     const r = document.querySelector(':root')
@@ -29,54 +22,66 @@ const primaryColor = config.primaryColor
 }
 
 :root{
+
+    // =========== Base ===========
     --colorTheme: 200;
     --colorThemeBg: 220;
     --font-mask-color: #{white(85)};
     --font-mask-sub-color: #{white(75)};
     --bg-mask-color: hsl(200 0 0 / 0.25); 
+
+    // =========== Dark Mode ===========
+    --primary: #{ct()};
+    --primary-light: #{ct(80)};
+    --primary-dark: #{ct(38)};
+    --menu-item-bg: hsl(var(--colorTheme), 40%,95%);
+    --menu-item-bg-active: #{ct(90)};
+    --background-color: hsl(var(--colorThemeBg), 40%,95%);
+    --card-background-color: #{white()};
+    --nav-background-color: #{white()};
+    --font-color: #{black()};
+    --sub-font-color: #{black(50)};
+    --font-quote-color: #{black(60)};
+    --font-quote-source-color: #{black(50)};
+    --inline-code-bg-color: #{ct(97)};
+    --inline-code-text-color: #{ct(44)};
+
+    transition: all 0.6s ease; 
 }
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --primary: #{ct(48)};
-        --primary-light: #{ct(50)};
-        --primary-dark: #{ct(35)};
-        --menu-item-bg: hsl(var(--colorThemeBg), 40%,10%);
-        --menu-item-bg-active: #{ct(40)};
-        --background-color: #{black(10)};
-        --card-background-color: hsl(var(--colorThemeBg), 15%,15%);
-        --nav-background-color: hsl(var(--colorThemeBg), 15%,15%);
-        --font-color: #{white(90)};
-        --sub-font-color: #{white(70)};
-        --font-quote-color: #{black(60)};
-        --font-quote-source-color: #{black(50)};
-        --inline-code-bg-color: #{ct(12)};
-        --inline-code-text-color: #{ct(40)};
-    }
+:root.dark {
+    --primary: #{ct(48)};
+    --primary-light: #{ct(50)};
+    --primary-dark: #{ct(35)};
+    --menu-item-bg: hsl(var(--colorThemeBg), 40%,10%);
+    --menu-item-bg-active: #{ct(40)};
+    --background-color: #{black(10)};
+    --card-background-color: hsl(var(--colorThemeBg), 15%,15%);
+    --nav-background-color: hsl(var(--colorThemeBg), 15%,15%);
+    --font-color: #{white(90)};
+    --sub-font-color: #{white(70)};
+    --font-quote-color: #{black(60)};
+    --font-quote-source-color: #{black(50)};
+    --inline-code-bg-color: #{ct(12)};
+    --inline-code-text-color: #{ct(40)};
 }
 
-@media (prefers-color-scheme: light) {
-    :root {
-        --primary: #{ct()};
-        --primary-light: #{ct(80)};
-        --primary-dark: #{ct(38)};
-        --menu-item-bg: hsl(var(--colorTheme), 40%,95%);
-        --menu-item-bg-active: #{ct(90)};
-        --background-color: hsl(var(--colorThemeBg), 40%,95%);
-        --card-background-color: #{white()};
-        --nav-background-color: #{white()};
-        --font-color: #{black()};
-        --sub-font-color: #{black(50)};
-        --font-quote-color: #{black(60)};
-        --font-quote-source-color: #{black(50)};
-        --inline-code-bg-color: #{ct(97)};
-        --inline-code-text-color: #{ct(44)};
-    }
-}
-
-:root{
-    transition: all 0.3s;
-}
+// :root.light {
+//     --primary: #{ct()};
+//     --primary-light: #{ct(80)};
+//     --primary-dark: #{ct(38)};
+//     --menu-item-bg: hsl(var(--colorTheme), 40%,95%);
+//     --menu-item-bg-active: #{ct(90)};
+//     --background-color: hsl(var(--colorThemeBg), 40%,95%);
+//     --card-background-color: #{white()};
+//     --nav-background-color: #{white()};
+//     --font-color: #{black()};
+//     --sub-font-color: #{black(50)};
+//     --font-quote-color: #{black(60)};
+//     --font-quote-source-color: #{black(50)};
+//     --inline-code-bg-color: #{ct(97)};
+//     --inline-code-text-color: #{ct(44)};
+// }
 
 
 html {

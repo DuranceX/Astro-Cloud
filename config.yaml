@@ -2,7 +2,16 @@
 sitename: "Cloud Demo"
 author: "Cardy"
 ## 色相值，0-360 
+## 参考值
+## 　0度: 红色，RGB:(255,  0,  0)
+##  60度: 黄色，RGB:(255,255,  0)
+## 120度: 绿色，RGB:(  0,255,  0)
+## 180度: 青色，RGB:(  0,255,255)
+## 240度: 蓝色，RGB:(  0,  0,255)
+## 300度: 紫色，RGB:(255,  0,255)
+## 360度: 红色，RGB:(255,  0,  0)
 primary_color: 200
+## 封面图
 cover: "/public/cover.jpg"
 logo: "/public/favicon.svg"
 quote_card_content: "希望你今后的每一次笑，都是真心的。"

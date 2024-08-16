@@ -60,4 +60,5 @@ Feel free to check [our documentation](https://docs.astro.build) or jump into ou
 - [ ] 文章页面
 - [ ] 置顶功能
 - [ ] 评论功能
+- [ ] Latex适配
 - [ ] ...

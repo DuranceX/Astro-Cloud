@@ -1,5 +1,5 @@
 ---
-import Tag from "@/components/Tag.vue"
+import ColorfulTag from "@/components/ColorfulTag.vue"
 const { post } = Astro.props
 const data = post.data
 ---
@@ -11,7 +11,7 @@ const data = post.data
         <!-- tags -->
         <div class="flex flex-wrap">
             {data.tags.map((tag:string) => (
-                <Tag tag={tag} />
+                <ColorfulTag tag={tag} />
             ))}
         </div>
         <!-- title -->

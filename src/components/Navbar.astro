@@ -1,7 +1,9 @@
 ---
-import { config } from '@/store/config';
 import HamburNavBar from './HamburNavBar.astro'
+import Config from '../store/config'
+import DarkmodeToggle from './DarkmodeToggle2.astro'
 
+const config = Config.getConfig()
 const links = config.menus
 const logo = config.logo
 const sitename = config.sitename
@@ -9,7 +11,7 @@ const sitename = config.sitename
 <nav class=" w-full fixed z-10">
     <HamburNavBar />
     <div class="justify-between items-center sm:flex hidden rounded-b-md h-16 px-20 bg-[--nav-background-color] text-[--font-color] shadow-md">
-        <div class="flex items-center">
+        <div id="logo" class="flex items-center cursor-pointer">
             <img class="w-10 h-10" src={logo}>
             <span>{sitename}</span>
         </div>
@@ -19,11 +21,18 @@ const sitename = config.sitename
                     <a class=" px-2 hover:text-[--primary]" href={link.url}>{link.name} </a>
                 ))
             }
-
         </div>
-        <div class="flex items-center" @click="console.log('click')">
-            <img class="w-10 h-10" src="/public/favicon.svg">
-            <span>Switch</span>
+        <div class="flex items-center">
+            <div class=" w-8 h-8 flex justify-center items-center">
+                <DarkmodeToggle />
+            </div>
         </div>
     </div>
 </nav>
+
+<script>
+    const logo = document.getElementById('logo') as HTMLElement
+    logo.addEventListener('click', () => {
+        window.location.href = '/'
+    })
+</script>

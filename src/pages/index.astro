@@ -4,6 +4,7 @@ import PostCard from "@/components/PostCard.vue";
 import { getPosts } from "@/utils/collections"
 import { getTagColor,setTags } from "@/utils/tagColor"
 import CoverCard from "@/components/CoverCard.astro";
+import DarkmodeToggle from "@/components/DarkmodeToggle.astro";
 
 const posts = await getPosts();
 
@@ -16,7 +17,6 @@ setTags(colorfulTags)
 ---
 <BaseLayout pageTitle="Home">
 	<CoverCard />
-	<!-- {JSON.stringify(config)} -->
 	<div class="flex flex-col card-width">
         {posts.map((post) => <PostCard post={post}></PostCard>)}
     </div>

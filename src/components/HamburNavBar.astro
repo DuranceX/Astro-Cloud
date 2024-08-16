@@ -1,24 +1,28 @@
 ---
-import { config } from '@/store/config';
+import Config from '@/store/config'
+import DarkmodeToggle from './DarkmodeToggle.astro'
 
+const config = Config.getConfig()
 const links = config.menus
 const logo = config.logo
 const sitename = config.sitename
 ---
 
 <div class="sm:hidden">
-    <div class="flex flex-col w-full text-slate-800">
-        <div class="h-12 flex flex-row justify-between items-center bg-white rounded-b-md px-6">
-            <div class="flex items-center">
+    <div class="flex flex-col w-full text-[--font-color]">
+        <div class="h-16 flex flex-row justify-between items-center bg-[--nav-background-color] rounded-b-md px-6 shadow-md">
+            <div class="flex items-center cursor-pointer">
                 <img class="w-10 h-10" src={logo}>
                 <span>{sitename}</span>
             </div>
-            <div id="switch" class="flex items-center">
-                <img class="w-10 h-10" src="../assets/icons/favicon.svg">
-                <span>Switch</span>
+            <div class="flex items-center">
+                <img id="menuBtn" class="w-10 h-10" src="src/assets/icons/menu.svg">
+                <div class=" w-8 h-8 flex justify-center items-center">
+                    <DarkmodeToggle />
+                </div>
             </div>
         </div>
-        <div id="menuPanel" class="absolute top-12 w-full shadow-lg bg-[--menu-item-bg]" style="display: none;">
+        <div id="menuPanel" class="absolute top-16 w-full shadow-lg bg-[--menu-item-bg] text-[--font-color]" style="display: none;">
             {links.map((link:any) => (
                 <div class="h-12 bg-[--menu-item-bg] active:bg-[--menu-item-bg-active]">
                     <a class="px-2 w-full h-full text-center flex items-center justify-center" href={link.url}>{link.name}</a>
@@ -31,8 +35,8 @@ const sitename = config.sitename
 <script>
     let isShowMenu = true
     const menuPanel = document.getElementById('menuPanel') as HTMLElement;
-    const switchBtn = document.getElementById('switch') as HTMLElement;
-    switchBtn.addEventListener('click', toggleMenuPanel)
+    const menuBtn = document.getElementById('menuBtn') as HTMLElement;
+    menuBtn.addEventListener('click', toggleMenuPanel)
     function toggleMenuPanel() {
         isShowMenu = !isShowMenu
         if(isShowMenu){

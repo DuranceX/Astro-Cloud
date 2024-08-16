@@ -1,0 +1,266 @@
+
+<div id="switchBtn">
+	<input type="checkbox" id="dark-mode-checkbox">
+	<div class="container">
+		<div class="theme-switch-wrapper">
+		<label class="theme-switch" for="dark-mode-checkbox">
+			<div class="slider round">
+				<div class="sun-ray-1"></div>
+				<div class="sun-ray-2"></div>
+			</div>
+			<div class="fake-slider">
+				<div class="sun-ray-3"></div>
+				<div class="sun-ray-4"></div>
+			</div>
+		</label>
+		</div>
+	</div>
+</div>
+
+<style>
+    /* Variables */
+:root {
+  /* Animation speed */
+  --animation-speed: .3s;
+  
+	/* Light-mode colors */
+	--light-font-color: #424242;
+	--light-bg-color: #fff;
+	--light-black: #333333ff;
+
+	/* Dark-mode colors */
+	--dark-font-color: #ffffffff;
+	--dark-bg-color: #333333ff;
+
+	/* Color variables */
+	--font-color: var(--light-font-color);
+	--bg-color: var(--light-bg-color);
+	--black: var(--light-black);
+}
+
+#dark-mode-checkbox ~ .container {
+	/* Set light mode variables */
+	--font-color: var(--light-font-color);
+	--bg-color: var(--light-bg-color);
+	--black: var(--light-black);
+}
+
+#dark-mode-checkbox:checked ~ .container {
+	/* Set dark mode variables */
+	--font-color: var(--dark-font-color);
+	--bg-color: var(--dark-bg-color);
+	--black: var(--nav-background-color);
+}
+
+.theme-switch-wrapper {
+  width: 16px;
+  height: 16px;
+  margin: auto;
+}
+
+.theme-switch {
+	display: inline-block;
+	height: 16px;
+	position: relative;
+	width: 16px;
+}
+
+.theme-switch input {
+	display: none;
+}
+
+.slider {
+	background-color: var(--black);
+	bottom: 0;
+	cursor: pointer;
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+	transform: rotateZ(-225deg);
+	transition: var(--animation-speed) all;
+}
+
+.slider:before {
+	background-color: #fff;
+	bottom: 2px;
+	content: '';
+	height: 12px;
+	left: 2px;
+	position: absolute;
+	transition: 0.3s;
+	width: 12px;
+}
+
+.fake-slider{
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: var(--animation-speed) all;
+}
+
+#dark-mode-checkbox:checked
+	~ .container
+	> .theme-switch-wrapper
+	> .theme-switch
+	> .slider {
+	background-color: var(--font-color);
+	transform: rotateZ(-45deg);
+}
+
+#dark-mode-checkbox:checked
+	~ .container
+	> .theme-switch-wrapper
+	> .theme-switch
+	> .slider:before {
+	background-color: var(--nav-background-color);
+	left: -2px;
+	transform: translateX(10px);
+}
+
+#dark-mode-checkbox:checked
+	~ .container
+	> .theme-switch-wrapper
+	> .theme-switch
+	> .fake-slider {
+	transform: rotateZ(270deg);
+}
+
+.slider.round {
+	border-radius: 34px;
+}
+
+.slider.round:before {
+	border-radius: 50%;
+}
+
+#dark-mode-checkbox:checked
+	~ .container
+	> .theme-switch-wrapper
+	> .theme-switch
+	> .slider
+	> .sun-ray-1 {
+	transform: scale(0.1, 0.1);
+	opacity: 0;
+}
+
+#dark-mode-checkbox:checked
+	~ .container
+	> .theme-switch-wrapper
+	> .theme-switch
+	> .slider
+	> .sun-ray-1 {
+	transform: scale(0.1, 0.1);
+	opacity: 0;
+}
+
+.sun-ray-1,
+.sun-ray-2,
+.sun-ray-3,
+.sun-ray-4 {
+	transition: var(--animation-speed) all;
+}
+
+.sun-ray-1:before {
+	content: '';
+	position: absolute;
+	left: -8px;
+	top: 7px;
+	height: 2px;
+	width: 4px;
+	background-color: var(--black);
+}
+
+.sun-ray-1:after {
+	content: '';
+	position: absolute;
+	right: -8px;
+	top: 7px;
+	height: 2px;
+	width: 4px;
+	background-color: var(--black);
+}
+
+.sun-ray-2:before {
+	content: '';
+	position: absolute;
+	left: 50%;
+	top: -8px;
+	transform: translateX(-50%);
+	height: 4px;
+	width: 2px;
+	background-color: var(--black);
+}
+
+.sun-ray-2:after {
+	content: '';
+	position: absolute;
+	left: 50%;
+	top: 20px;
+	transform: translateX(-50%);
+	height: 4px;
+	width: 2px;
+	background-color: var(--black);
+}
+
+.sun-ray-3:before {
+	content: '';
+	position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: -8px;
+	height: 4px;
+	width: 2px;
+	background-color: var(--black);
+}
+
+.sun-ray-3:after {
+	content: '';
+	position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 20px;
+	height: 4px;
+	width: 2px;
+	background-color: var(--black);
+}
+
+.sun-ray-4:before {
+	content: '';
+	position: absolute;
+    left: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+	height: 2px;
+	width: 4px;
+	background-color: var(--black);
+}
+
+.sun-ray-4:after {
+	content: '';
+	position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+	height: 2px;
+	width: 4px;
+	background-color: var(--black);
+}
+
+.container {
+  max-width: 100%;
+  margin: auto;
+}
+
+input {
+	overflow: hidden;
+	width: 0;
+	height: 0;
+	opacity: 0;
+	position: fixed;
+	left: -10px;
+}
+  </style>

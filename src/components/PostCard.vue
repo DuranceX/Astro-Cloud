@@ -17,14 +17,14 @@
                 {{ description }}
             </div>
             <div name="tag-bar" class="flex flex-wrap">
-                <Tag v-for="(tag) in post.tags" :key="tag" :tag="tag"/>
+                <ColorfulTag v-for="(tag) in post.tags" :key="tag" :tag="tag"/>
             </div>
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
-import Tag from './Tag.vue';
+import ColorfulTag from './ColorfulTag.vue';
 
 const props = defineProps<{
     post: any

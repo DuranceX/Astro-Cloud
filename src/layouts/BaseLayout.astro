@@ -14,17 +14,18 @@ const { pageTitle } = Astro.props
 		<meta name="description" content="Astro description" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<script type="module" src="src/utils/themeToggle.js" defer></script>
 		<meta name="generator" content={Astro.generator} />
         <title>{pageTitle}</title>
 		<ViewTransitions />
 	</head>
 	<body>
-        <Navbar client:load/>
+        <Navbar />
 		<div class="flex flex-col justify-center items-center pt-16">
 			<slot />
 		</div>
         <Footer />
-        <GlobalStyles client:load/>
+        <GlobalStyles />
 	</body>
 </html>
 

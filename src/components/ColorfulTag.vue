@@ -12,6 +12,3 @@ const props = defineProps<{
 
 const tagClass = getTags()[props.tag];
 </script>
-
-<style scoped>
-</style>
