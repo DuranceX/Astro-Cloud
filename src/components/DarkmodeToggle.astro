@@ -1,9 +1,12 @@
+---
+const id = Math.random().toString(36).substring(2, 9)
+---
 
-<div id="switchBtn">
-	<input type="checkbox" id="dark-mode-checkbox">
+<div data-name="switchBtn">
+	<input type="checkbox" id={id}>
 	<div class="container">
 		<div class="theme-switch-wrapper">
-		<label class="theme-switch" for="dark-mode-checkbox">
+		<label class="theme-switch" for={id}>
 			<div class="slider round">
 				<div class="sun-ray-1"></div>
 				<div class="sun-ray-2"></div>
@@ -38,14 +41,14 @@
 	--black: var(--light-black);
 }
 
-#dark-mode-checkbox ~ .container {
+[type='checkbox'] ~ .container {
 	/* Set light mode variables */
 	--font-color: var(--light-font-color);
 	--bg-color: var(--light-bg-color);
 	--black: var(--light-black);
 }
 
-#dark-mode-checkbox:checked ~ .container {
+[type='checkbox']:checked ~ .container {
 	/* Set dark mode variables */
 	--font-color: var(--dark-font-color);
 	--bg-color: var(--dark-bg-color);
@@ -102,7 +105,7 @@
     transition: var(--animation-speed) all;
 }
 
-#dark-mode-checkbox:checked
+[type='checkbox']:checked
 	~ .container
 	> .theme-switch-wrapper
 	> .theme-switch
@@ -111,7 +114,7 @@
 	transform: rotateZ(-45deg);
 }
 
-#dark-mode-checkbox:checked
+[type='checkbox']:checked
 	~ .container
 	> .theme-switch-wrapper
 	> .theme-switch
@@ -121,7 +124,7 @@
 	transform: translateX(10px);
 }
 
-#dark-mode-checkbox:checked
+[type='checkbox']:checked
 	~ .container
 	> .theme-switch-wrapper
 	> .theme-switch
@@ -137,7 +140,7 @@
 	border-radius: 50%;
 }
 
-#dark-mode-checkbox:checked
+[type='checkbox']:checked
 	~ .container
 	> .theme-switch-wrapper
 	> .theme-switch
@@ -147,7 +150,7 @@
 	opacity: 0;
 }
 
-#dark-mode-checkbox:checked
+[type='checkbox']:checked
 	~ .container
 	> .theme-switch-wrapper
 	> .theme-switch
