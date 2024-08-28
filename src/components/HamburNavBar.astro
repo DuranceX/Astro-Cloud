@@ -16,7 +16,7 @@ const sitename = config.sitename
                 <span class="text-xl">{sitename}</span>
             </div>
             <div class="flex items-center">
-                <div class=" w-8 h-8 flex justify-center items-center">
+                <div class=" w-8 h-8 flex justify-center items-center" id="ham-theme">
                     <DarkmodeToggle />
                 </div>
                 <div class="hamburger ml-3 mt-1" id="hamburger">
@@ -62,9 +62,31 @@ function bindHomeButton(){
     })
 }
 
+function bindThemeToggle() {
+        const isDark = localStorage.getItem('theme') === 'dark';
+
+        const htmlElement = document.documentElement;
+        const switchBtn = document.getElementById('ham-theme')?.querySelector('div[data-name]') as HTMLElement;
+
+            // 根据状态设置按钮初始状态
+        switchBtn.firstElementChild.checked = isDark;
+        switchBtn.addEventListener('change', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+            } else {
+                htmlElement.classList.remove('light');
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+    }
+
 document.addEventListener('astro:page-load', () => {
     bindMenuButton()
     bindHomeButton()
+    bindThemeToggle()
 })
 </script>
 

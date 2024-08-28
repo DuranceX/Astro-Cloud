@@ -23,7 +23,7 @@ const sitename = config.sitename
             }
         </div>
         <div class="flex items-center absolute right-20">
-            <div class=" w-8 h-8 flex justify-center items-center">
+            <div class=" w-8 h-8 flex justify-center items-center" id="nav-theme">
                 <DarkmodeToggle />
             </div>
         </div>
@@ -31,11 +31,35 @@ const sitename = config.sitename
 </nav>
 
 <script>
-    function toggleBackHome(){
+    function bindHomeButton(){
         const logo = document.getElementById('logo') as HTMLElement
         logo.addEventListener('click', () => {
             window.location.href = '/'
         })
     }
-    document.addEventListener('astro:page-load', toggleBackHome);
+    function bindThemeToggle() {
+        const isDark = localStorage.getItem('theme') === 'dark';
+
+        const htmlElement = document.documentElement;
+        const switchBtn = document.getElementById('nav-theme')?.querySelector('div[data-name]') as HTMLElement;
+
+            // 根据状态设置按钮初始状态
+        switchBtn.firstElementChild.checked = isDark;
+        switchBtn.addEventListener('change', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+            } else {
+                htmlElement.classList.remove('light');
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+    }
+
+    document.addEventListener('astro:page-load', () => {
+        bindThemeToggle()
+        bindHomeButton()
+    });
 </script>
