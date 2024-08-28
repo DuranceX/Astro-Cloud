@@ -11,18 +11,22 @@ const sitename = config.sitename
 <div class="sm:hidden">
     <div class="flex flex-col w-full text-[--font-color]">
         <div class="h-16 flex flex-row justify-between items-center bg-[--nav-background-color] rounded-b-md px-6 shadow-md">
-            <div class="flex items-center cursor-pointer">
-                <img class="w-10 h-10" src={logo}>
-                <span>{sitename}</span>
+            <div class="flex items-center cursor-pointer" id="ham-logo">
+                <img class="w-10 h-10 mr-2" src={logo}>
+                <span class="text-xl">{sitename}</span>
             </div>
             <div class="flex items-center">
-                <img id="menuBtn" class="w-10 h-10" src="src/assets/icons/menu.svg">
                 <div class=" w-8 h-8 flex justify-center items-center">
                     <DarkmodeToggle />
                 </div>
+                <div class="hamburger ml-3 mt-1" id="hamburger">
+                    <span class="line"></span>
+                    <span class="line"></span>
+                    <span class="line"></span>
+                </div>
             </div>
         </div>
-        <div id="menuPanel" class="absolute top-16 w-full shadow-lg bg-[--menu-item-bg] text-[--font-color]" style="display: none;">
+        <div id="menuPanel" class="absolute top-16 w-full shadow-lg bg-[--menu-item-bg] text-[--font-color] opacity-0 pointer-events-none transition-opacity">
             {links.map((link:any) => (
                 <div class="h-12 bg-[--menu-item-bg] active:bg-[--menu-item-bg-active]">
                     <a class="px-2 w-full h-full text-center flex items-center justify-center" href={link.url}>{link.name}</a>
@@ -33,17 +37,99 @@ const sitename = config.sitename
 </div>
 
 <script>
+function bindMenuButton(){
     let isShowMenu = true
-    const menuPanel = document.getElementById('menuPanel') as HTMLElement;
-    const menuBtn = document.getElementById('menuBtn') as HTMLElement;
+    const menuPanel = document.getElementById('menuPanel') as HTMLElement
+    const menuBtn = document.getElementById('hamburger') as HTMLElement
     menuBtn.addEventListener('click', toggleMenuPanel)
     function toggleMenuPanel() {
         isShowMenu = !isShowMenu
         if(isShowMenu){
-            menuPanel.style.display = 'none'
+            menuPanel.style.opacity = '0'
+            menuPanel.style.pointerEvents = 'none'
         }else{
-            menuPanel.style.display = 'block'
+            menuPanel.style.opacity = '1'
+            menuPanel.style.pointerEvents = 'all'
         }
+        menuBtn.classList.toggle('is-active')
     }
+}
+
+function bindHomeButton(){
+    const logo = document.getElementById('ham-logo') as HTMLElement
+        logo.addEventListener('click', () => {
+            window.location.href = '/'
+    })
+}
+
+document.addEventListener('astro:page-load', () => {
+    bindMenuButton()
+    bindHomeButton()
+})
 </script>
+
+<style>
+.hamburger .line{
+  width: 28px;
+  height: 2px;
+  background-color: var(--font-color);
+  display: block;
+  margin: 8px auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.hamburger:hover{
+  cursor: pointer;
+}
+
+#hamburger{
+  position: relative;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+#hamburger.is-active{
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+#hamburger:before{
+  content: "";
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 28px;
+  height: 28px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+#hamburger.is-active .line{
+  width: 28px;
+}
+
+#hamburger.is-active .line:nth-child(2){
+  opacity: 0;
+}
+
+#hamburger.is-active .line:nth-child(1){
+  -webkit-transform: translateY(10px);
+  -ms-transform: translateY(10px);
+  -o-transform: translateY(10px);
+  transform: translateY(10px);
+}
+
+#hamburger.is-active .line:nth-child(3){
+  -webkit-transform: translateY(-10px) rotate(90deg);
+  -ms-transform: translateY(-10px) rotate(90deg);
+  -o-transform: translateY(-10px) rotate(90deg);
+  transform: translateY(-10px) rotate(90deg);
+}
+</style>
 

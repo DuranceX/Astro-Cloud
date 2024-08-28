@@ -10,10 +10,10 @@ const sitename = config.sitename
 ---
 <nav class=" w-full fixed z-10">
     <HamburNavBar />
-    <div class="justify-between items-center sm:flex hidden rounded-b-md h-16 px-20 bg-[--nav-background-color] text-[--font-color] shadow-md">
-        <div id="logo" class="flex items-center cursor-pointer">
-            <img class="w-10 h-10" src={logo}>
-            <span>{sitename}</span>
+    <div class="justify-center items-center sm:flex hidden rounded-b-md h-16 px-20 bg-[--nav-background-color] text-[--font-color] shadow-md">
+        <div id="logo" class="flex items-center cursor-pointer absolute left-20">
+            <img class="w-10 h-10 mr-2" src={logo}>
+            <span class=" text-xl hover:text-[--primary]">{sitename}</span>
         </div>
         <div>
             {
@@ -22,7 +22,7 @@ const sitename = config.sitename
                 ))
             }
         </div>
-        <div class="flex items-center">
+        <div class="flex items-center absolute right-20">
             <div class=" w-8 h-8 flex justify-center items-center">
                 <DarkmodeToggle />
             </div>
@@ -31,8 +31,11 @@ const sitename = config.sitename
 </nav>
 
 <script>
-    const logo = document.getElementById('logo') as HTMLElement
-    logo.addEventListener('click', () => {
-        window.location.href = '/'
-    })
+    function toggleBackHome(){
+        const logo = document.getElementById('logo') as HTMLElement
+        logo.addEventListener('click', () => {
+            window.location.href = '/'
+        })
+    }
+    document.addEventListener('astro:page-load', toggleBackHome);
 </script>
