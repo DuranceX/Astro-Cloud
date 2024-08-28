@@ -56,8 +56,10 @@ Feel free to check [our documentation](https://docs.astro.build) or jump into ou
 ## TODO
 
 - [x] 主页移动端适配
-- [ ] 标签页面
-- [ ] 文章页面
+- [x] 标签页面
+- [x] 文章页面
+- [x] Footer
+- [ ] 关于页面
 - [ ] 置顶功能
 - [ ] 评论功能
 - [ ] Latex适配

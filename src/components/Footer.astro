@@ -1,0 +1,18 @@
+---
+import Config from '@/store/config'
+const config = Config.getConfig()
+const author = config.author
+---
+<div class="flex flex-col justify-center items-center my-10 text-[--sub-font-color]">
+    <div class="flex">
+        <img src="/src/assets/icons/copyright.svg"/> &nbsp;2024 &nbsp;
+        <span>@ {author}</span>
+    </div>
+    <span>Powered by <a href="https://astro.build/">Astro</a> | Theme <a href="https://github.com/DuranceX/Astro-Cloud">Cloud</a></span>
+</div>
+
+<style>
+a{
+    @apply text-[--font-color] hover:text-[--primary];
+}
+</style>

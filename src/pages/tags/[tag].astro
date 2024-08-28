@@ -10,17 +10,21 @@ export async function getStaticPaths() {
     const filteredPosts = allPosts.filter((post) => post.data.tags.includes(tag));
     return {
       params: { tag },
-      props: { posts: filteredPosts },
+      props: { posts: filteredPosts, length: filteredPosts.length },
     };
   });
 }
 
 const { tag } = Astro.params;
-const { posts } = Astro.props;
+const { posts,length } = Astro.props;
+
 ---
 <BaseLayout pageTitle={tag}>
-  <p>包含「{tag}」标签的文章</p>
-  <div class="flex flex-col py-60 w-5/6 md:w-3/4 2xl:w-1/2">
+
+  <div class="flex justify-center card-width card-style items-center py-16 mt-12 mb-8 px-8 flex-wrap" >
+    <p class=" text-xl">包含「{tag}」标签的文章 - 共计{length}篇</p>
+  </div>
+  <div class="flex flex-col card-width">
     {posts.map((post) => <PostCard post={post}></PostCard>)}
 </div>
 </BaseLayout>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ColorfulTag from '@/components/ColorfulTag.vue';
 import { getPosts } from '@/utils/collections';
 
 const allPosts = await getPosts();
@@ -7,9 +8,9 @@ const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
 const pageTitle = "Tag";
 ---
 <BaseLayout pageTitle={pageTitle}>
-    <div>
+    <div class="flex card-width card-style items-center py-16 mt-12 px-8 flex-wrap" >
         {tags.map((tag) => (
-            <p><a href={`/tags/${tag}`}>{tag}</a></p>
+            <ColorfulTag tag={tag} />
         ))}
     </div>
 </BaseLayout>
