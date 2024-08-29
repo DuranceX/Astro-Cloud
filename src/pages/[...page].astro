@@ -2,7 +2,6 @@
 import BaseLayout from "../layouts/BaseLayout.astro"
 import PostCard from "@/components/PostCard.vue";
 import { getPosts } from "@/utils/collections"
-import { getTagColor,setTags } from "@/utils/tagColor"
 import CoverCard from "@/components/CoverCard.astro";
 import Paginator from "@/components/Paginator.astro";
 import Config from "@/store/config"
@@ -13,14 +12,6 @@ export async function getStaticPaths({ paginate }) {
   const pageSize = Config.getConfig().pageSize;
   return paginate(posts, { pageSize: pageSize });
 }
-
-const posts = await getPosts();
-const tags = [...new Set(posts.map(entry => entry.data.tags).flat())];
-let colorfulTags:any = {}
-tags.forEach((tag,i) => {
-	colorfulTags[tag] = getTagColor()[i % (Object.keys(getTagColor()).length / 2)]
-})
-setTags(colorfulTags)
 
 const { page } = Astro.props;
 

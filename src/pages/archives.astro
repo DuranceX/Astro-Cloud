@@ -35,10 +35,10 @@ const pageTitle = "Archives";
                         <p class=" text-xl">{year}年<span class="ml-4 text-sm text-[--sub-font-color]">{length} posts</span></p>
                     </div>
                     <div data-name="collapse-container" class="wrapper pl-6 sm:pl-10 mt-4">
-                        {posts.map((post) => (
+                        {posts.map((post:any) => (
                             <div class="flex w-full h-8">
-                                <p class=" w-24 text-[--sub-font-color]">{post.date.month} - {post.date.day}</p>
-                                <a class=" line-clamp-1 hover:text-[--primary] hover:translate-x-3 transition-transform cursor-pointer" href={'/posts/'+post.url} >{post.title}</a>
+                                <p class=" w-24 text-[--sub-font-color] shrink-0">{post.date.month} - {post.date.day}</p>
+                                <a class=" truncate hover:text-[--primary] text-nowrap hover:translate-x-3 transition-transform cursor-pointer" href={'/posts/'+post.url} >{post.title}</a>
                             </div>
                         ))}
                     </div>

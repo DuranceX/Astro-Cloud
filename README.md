@@ -62,7 +62,7 @@ Feel free to check [our documentation](https://docs.astro.build) or jump into ou
 - [x] 关于页面
 - [x] 收藏页面
 - [x] 分页功能
-- [ ] 归档页面
+- [x] 归档页面
 - [ ] 置顶功能
 - [ ] 评论功能
 - [ ] Latex适配

@@ -6,10 +6,21 @@ import Navbar from '@/components/Navbar.astro'
 import Footer from '@/components/Footer.astro';
 import GlobalStyles from '@/components/GlobalStyles.astro';
 
+import { getPosts } from "@/utils/collections"
+import { getTagColor,setTags } from "@/utils/tagColor"
+
 const config = Config.getConfig()
 const iconfont = config.iconfontUrl;
 console.log(iconfont)
 const { pageTitle } = Astro.props
+
+const posts = await getPosts();
+const tags = [...new Set(posts.map(entry => entry.data.tags).flat())];
+let colorfulTags:any = {}
+tags.forEach((tag,i) => {
+	colorfulTags[tag] = getTagColor()[i % (Object.keys(getTagColor()).length / 2)]
+})
+setTags(colorfulTags)
 ---
 
 <!doctype html>
