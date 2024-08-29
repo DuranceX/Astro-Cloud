@@ -68,7 +68,15 @@ function bindThemeToggle() {
         const htmlElement = document.documentElement;
         const switchBtn = document.getElementById('ham-theme')?.querySelector('div[data-name]') as HTMLElement;
 
-            // 根据状态设置按钮初始状态
+        if(isDark){
+            htmlElement.classList.remove('light');
+            htmlElement.classList.add('dark');
+        }else{
+            htmlElement.classList.remove('dark');
+            htmlElement.classList.add('light');
+        }
+
+        // 根据状态设置按钮初始状态
         switchBtn.firstElementChild.checked = isDark;
         switchBtn.addEventListener('change', () => {
             if (htmlElement.classList.contains('dark')) {

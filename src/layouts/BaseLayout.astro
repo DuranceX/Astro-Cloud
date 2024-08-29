@@ -24,6 +24,7 @@ const { pageTitle } = Astro.props
 		<script is:inline>
 			const isDark = localStorage.getItem('theme') === 'dark';
 			const htmlElement = document.documentElement;
+			console.log(1231)
 			if(isDark){
 				htmlElement.classList.remove('light');
 				htmlElement.classList.add('dark');
