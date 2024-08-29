@@ -15,3 +15,7 @@ export async function getPosts(sort:string = 'desc') {
   }
   return posts;
 }
+
+export async function getAbout() {
+  return await getCollection('about');
+}

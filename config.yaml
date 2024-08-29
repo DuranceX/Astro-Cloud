@@ -16,6 +16,7 @@ cover: "/public/cover.jpg"
 logo: "/public/favicon.svg"
 quote_card_content: "希望你今后的每一次笑，都是真心的。"
 quote_card_source: "-- 南河「深海」"
+iconfont_url: "//at.alicdn.com/t/c/font_4667994_z1dou20jjps.css"
 
 
 # menu
@@ -30,3 +31,18 @@ menu:
     url: "/friend"
   - name: "留言"
     url: "/message"
+
+# about
+avatar: "/public/cover.jpg"
+description: "一个简单的博客"
+## name为名称，中文用完整拼音，全部小写
+social:
+  - name: "github"
+    url: "https://github.com/DuranceX"
+  - name: "zhihu"
+    url: "https://www.zhihu.com/"
+  - name: "weibo"
+    url: "https://www.weibo.com/"
+  - name: "twitch"
+    url: "https://www.twitch.com/"
+  

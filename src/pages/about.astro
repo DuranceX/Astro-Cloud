@@ -1,7 +1,38 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro"
+import Config from "@/store/config";
+import { getAbout } from '@/utils/collections';
+
+const about = await getAbout();
+const config = Config.getConfig();
+const socials = config.social;
+const avatar = config.avatar;
+const desc = config.description;
 ---
 
 <BaseLayout pageTitle="About">
-  <h1 class="bg-[--primary-light]">about</h1>
+  <div class="flex flex-col card-width card-style justify-center items-center py-16 mt-12 px-10 flex-wrap" >
+    <!-- avatar -->
+    <img src={avatar} class="rounded-full w-24 h-24 object-cover" />
+    <!-- description -->
+    <p class=" text-md my-4">{desc}</p>
+    <!-- socials -->
+    <div>
+      {socials.map((social:any) => {
+        return <a href={social.url}><i class={"iconfont icon-"+social.name}></i></a>
+      })
+     }
+    </div>
+      <!-- content -->
+    <div class=" text-start w-full mt-8">
+      {about[0].body}
+    </div>
+  </div>
 </BaseLayout>
+
+<style>
+.iconfont{
+  font-size: 1.2rem;
+  margin: 0 0.4rem;
+}
+</style>

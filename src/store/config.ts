@@ -16,13 +16,16 @@ export default class Config {
             logo: data.logo,
             quoteCardContent: data.quote_card_content,
             quoteCardSource: data.quote_card_source,
-            menus: data.menu
+            iconfontUrl: data.iconfont_url,
+            menus: data.menu,
+            avatar: data.avatar,
+            description: data.description,
+            social: data.social,
         }
     }
 
     static getConfig() {
         if (!Config._instance) {
-            console.log(2222)
             new Config();
         }
         return Config._instance;
