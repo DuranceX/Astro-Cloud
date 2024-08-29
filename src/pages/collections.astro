@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro"
+import CollectionCard from "@/components/CollectionCard.astro"
+import Config from "@/store/config"
+
+const config = Config.getConfig()
+const collections = config.collections
+---
+
+<BaseLayout pageTitle="Collections">
+  <div class="flex card-width card-style items-center py-16 mt-12 px-8 flex-wrap" >
+    {collections.map((collection) => (
+      <CollectionCard collection={collection} />
+    ))}
+  </div>
+</BaseLayout>

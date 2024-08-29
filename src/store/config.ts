@@ -21,6 +21,7 @@ export default class Config {
             avatar: data.avatar,
             description: data.description,
             social: data.social,
+            collections: data.collections
         }
     }
 
