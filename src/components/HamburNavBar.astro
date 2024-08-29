@@ -77,7 +77,8 @@ function bindThemeToggle() {
         }
 
         // 根据状态设置按钮初始状态
-        switchBtn.firstElementChild.checked = isDark;
+        const switchBtnCheckbox = switchBtn.firstElementChild as HTMLInputElement;
+        switchBtnCheckbox.checked = isDark;
         switchBtn.addEventListener('change', () => {
             if (htmlElement.classList.contains('dark')) {
                 htmlElement.classList.remove('dark');

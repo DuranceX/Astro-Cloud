@@ -23,10 +23,11 @@ tags.forEach((tag,i) => {
 setTags(colorfulTags)
 
 const { page } = Astro.props;
+
 ---
 <BaseLayout pageTitle="Home">
 	<CoverCard />
-	{page.data.map((post)=>{
+	{page.data.map((post:any)=>{
 		return (
 		<div class="flex flex-col card-width">
 			<PostCard post={post}></PostCard>

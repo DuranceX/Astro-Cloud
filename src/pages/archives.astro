@@ -1,0 +1,82 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getPosts } from '@/utils/collections';
+import { formateDate } from '@/utils/utils';
+
+const posts = await getPosts();
+const data = posts.map((post) => {
+    return {
+        title: post.data.title,
+        date: formateDate(post.data.date),
+        url: post.slug
+    }
+});
+
+const groupedData = data.reduce((acc:any, post) => {
+    const year = post.date.year;
+    if (!acc[year]) {
+        acc[year] = [];
+    }
+    acc[year].push(post);
+    return acc;
+}, {});
+
+const pageTitle = "Archives";
+---
+<BaseLayout pageTitle={pageTitle}>
+    <div class="flex flex-col card-width card-style items-center py-8 sm:py-16 mt-12 px-4 sm:px-8 flex-wrap">
+    {
+        Object.keys(groupedData).sort((a,b)=> Number(b)-Number(a)).map((year) => {
+            const posts = groupedData[Number(year)];
+            const length = posts.length;
+            return (
+                <div class="w-full">
+                    <div data-name="collapse-button" class="flex justify-start items-center flex-wrap h-16 hover:bg-[--card-hover-bg-color] pl-4 sm:pl-8 rounded-2xl cursor-pointer">
+                        <p class=" text-xl">{year}年<span class="ml-4 text-sm text-[--sub-font-color]">{length} posts</span></p>
+                    </div>
+                    <div data-name="collapse-container" class="wrapper pl-6 sm:pl-10 mt-4">
+                        {posts.map((post) => (
+                            <div class="flex w-full h-8">
+                                <p class=" w-24 text-[--sub-font-color]">{post.date.month} - {post.date.day}</p>
+                                <a class=" line-clamp-1 hover:text-[--primary] hover:translate-x-3 transition-transform cursor-pointer" href={'/posts/'+post.url} >{post.title}</a>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        })
+    }
+    </div>
+</BaseLayout>
+
+<script>
+    const bindCollapse = () => {
+        const collapseButtons = document.querySelectorAll('[data-name="collapse-button"]');
+        const collapseContainers = document.querySelectorAll('[data-name="collapse-container"]');
+
+        collapseButtons.forEach((button, index) => {
+            button.addEventListener('click', () => {
+                if(collapseContainers[index].classList.contains('open')){
+                    collapseContainers[index].classList.remove('open');
+                    collapseContainers[index].setAttribute('style', 'height: 0px');
+                }
+                else{
+                    collapseContainers[index].classList.add('open');
+                    collapseContainers[index].setAttribute('style', `height: ${collapseContainers[index].scrollHeight}px`);
+                }
+            });
+        });
+    }
+
+    document.addEventListener('astro:page-load', () => {
+        bindCollapse();
+    });
+</script>
+
+<style>
+    .wrapper {
+        height: 0px;
+        overflow: hidden;
+        transition: height 200ms;
+    }
+</style>

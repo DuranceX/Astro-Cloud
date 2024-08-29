@@ -9,7 +9,7 @@ const collections = config.collections
 
 <BaseLayout pageTitle="Collections">
   <div class="flex card-width card-style items-center py-16 mt-12 px-8 flex-wrap" >
-    {collections.map((collection) => (
+    {collections.map((collection:any) => (
       <CollectionCard collection={collection} />
     ))}
   </div>
