@@ -1,0 +1,87 @@
+---
+import type { Page } from 'astro';
+
+const HIDDEN = '...';
+
+type Props = Page;
+const page = Astro.props;
+
+let pages: string[] = [];
+let current = page.currentPage;
+let last = page.lastPage;
+
+if(last<=7){
+    for(let i=1;i<=last;i++){
+        pages.push(i+'');
+    }
+}
+else{
+    if(current<=4){
+        for(let i=1;i<=5;i++){
+            pages.push(i+'');
+        }
+        pages.push(HIDDEN);
+        pages.push(last+'');
+    }
+    else if(current>=last-3){
+        pages.push('1');
+        pages.push(HIDDEN);
+        for(let i=last-4;i<=last;i++){
+            pages.push(i+'');
+        }
+    }
+    else{
+        pages.push('1');
+        pages.push(HIDDEN);
+        for(let i=current-1;i<=current+1;i++){
+            pages.push(i+'');
+        }
+        pages.push(HIDDEN);
+        pages.push(last+'');
+    }
+}
+
+const getPageUrl = (page: string) => {
+    if(page===HIDDEN){
+        return '';
+    }
+    if(page==='1'){
+        return '/';
+    }
+    return '/'+page;
+}
+---
+
+<div class="flex">
+    {
+		page.url.prev ? (
+			<a class="paginator-item" href={page.url.prev} aria-label="Go to previous page">
+				<i class="iconfont icon-left text-3xl"></i>
+			</a>
+		) : null
+	}
+    {
+        pages.map((p)=>{
+            return (
+                <a class={`paginator-item ${p===(page.currentPage+'')?'active':''}`} href={getPageUrl(p)}>{p}</a>
+            )
+        })
+    }
+	{
+		page.url.next ? (
+			<a class="paginator-item" href={page.url.next} aria-label="Go to next page">
+				<i class="iconfont icon-right text-3xl"></i>
+			</a>
+		) : null
+	}
+</div>
+
+<style>
+.paginator-item{
+    @apply bg-[--card-background-color] text-[--font-color] hover:text-[--primary] hover:bg-[--paginator-item-hover-bg-color] w-12 h-12 flex items-center justify-center mx-1 rounded-md;
+}
+
+.active{
+    @apply text-[--primary] bg-[--paginator-item-hover-bg-color];
+}
+</style>

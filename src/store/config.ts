@@ -17,6 +17,7 @@ export default class Config {
             quoteCardContent: data.quote_card_content,
             quoteCardSource: data.quote_card_source,
             iconfontUrl: data.iconfont_url,
+            pageSize: data.page_size,
             menus: data.menu,
             avatar: data.avatar,
             description: data.description,

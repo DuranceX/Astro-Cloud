@@ -33,7 +33,9 @@ const cover = config.cover
 </div>
 
 <script define:vars={{cover}}>
-    document.getElementById('cover').style.backgroundImage = `url('${cover}')`
+    document.addEventListener('astro:page-load',()=>{
+        document.getElementById('cover').style.backgroundImage = `url('${cover}')`
+    })
 </script>
 
 <style>
