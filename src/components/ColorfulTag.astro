@@ -5,7 +5,7 @@ const { tag } = Astro.props;
 const tagClass = getTags()[tag];
 ---
 
-<div class={tagClass} class=" px-4 py-1 rounded-md mr-2 transition-colors cursor-pointer break-keep mb-2">
-    <a href={'/tags/'+tag}>{{tag}}</a>
+<div class={tagClass+" px-4 py-1 rounded-md mr-2 transition-colors cursor-pointer break-keep mb-2"}>
+    <a href={'/tags/'+tag}>{tag}</a>
 </div>
 
