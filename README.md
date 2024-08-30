@@ -64,7 +64,7 @@ Feel free to check [our documentation](https://docs.astro.build) or jump into ou
 - [x] 分页功能
 - [x] 归档页面
 - [x] Latex适配
-- [ ] 上一篇和下一篇
+- [x] 上一篇和下一篇
 - [ ] 置顶功能
 - [ ] 评论功能
 - [ ] ...

@@ -30,7 +30,29 @@ export default {
 				fuchsia:{
 					night: '#d946ef2e',
 				},
-			}
+			},
+			animation:{
+				'animate-bounce-left': 'bounce-left 1s infinite',
+				'animate-bounce-right': 'bounce-right 1s infinite',
+			},
+			keyframes:{
+				'bounce-left': {
+					'0%, 100%': {
+						transform: 'translateX(0)',
+					},
+					'50%': {
+						transform: 'translateX(-25%)',
+					},
+				},
+				'bounce-right': {
+					'0%, 100%': {
+						transform: 'translateX(0)',
+					},
+					'50%': {
+						transform: 'translateX(25%)',
+					},
+				},
+			},
 		},
 	},
 	plugins: [

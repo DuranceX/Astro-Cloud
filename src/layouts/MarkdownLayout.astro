@@ -1,8 +1,23 @@
 ---
 import ColorfulTag from "@/components/ColorfulTag.vue"
+import { getPosts } from "@/utils/collections"
+
 const { post } = Astro.props
 const data = post.data
 const math = post.data.math
+let index = -1;
+
+const posts = await getPosts();
+const entry = posts.reduce((acc:any[], temp) => {
+    if(temp.data.title === post.data.title){
+        index = acc.length;
+    }
+    acc.push({
+        slug: temp.slug,
+        title: temp.data.title
+    })
+    return acc;
+}, []);
 ---
 <html>
     <head><base target="_blank" /></head>
@@ -38,6 +53,23 @@ const math = post.data.math
     <article class="prose dark:prose-invert w-full">
         <slot />
     </article>
+</div>
+<div class=" card-width mt-3">
+    {index > 0 && (
+        <a href={entry[index-1].slug} class=" float-left card-style py-6 px-6 w-2/5 hover:bg-[--paginator-item-hover-bg-color] hover:text-[--primary] transition-colors">
+            <div class="flex items-center">
+                <i class="iconfont icon-left text-3xl"></i>{entry[index-1].title}
+            </div>
+        </a>
+    )}
+    {index < entry.length-1 && (
+        <a href={entry[index+1].slug} class=" float-right card-style py-6 px-6 w-2/5 hover:bg-[--paginator-item-hover-bg-color] hover:text-[--primary] transition-colors">
+            <div class="flex items-center justify-end">
+                {entry[index+1].title}
+                <i class="iconfont icon-right text-3xl"></i>
+            </div>
+        </a>
+    )}
 </div>
 
 <script lang="js" define:vars={{math}}>
