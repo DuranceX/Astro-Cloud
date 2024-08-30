@@ -7,13 +7,13 @@ import Paginator from "@/components/Paginator.astro";
 import Config from "@/store/config"
 
 
-export async function getStaticPaths({ paginate }) {
+export async function getStaticPaths({ paginate }: { paginate: any }) {
   const posts = await getPosts();
   const pageSize = Config.getConfig().pageSize;
   return paginate(posts, { pageSize: pageSize });
 }
 
-const { page } = Astro.props;
+const { page }: { page: any } = Astro.props;
 
 ---
 <BaseLayout pageTitle="Home">

@@ -2,10 +2,10 @@
 import ColorfulTag from "@/components/ColorfulTag.vue"
 const { post } = Astro.props
 const data = post.data
+const math = post.data.math
 ---
 <html>
     <head><base target="_blank" /></head>
-    <script src="../src/store/mathjax-config.js" defer></script>
     <script type="text/javascript" id="MathJax-script" defer
         src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
     </script>
@@ -39,6 +39,19 @@ const data = post.data
         <slot />
     </article>
 </div>
+
+<script lang="js" define:vars={{math}}>
+    const renderLatex = () => {
+        if (window.MathJax && math) {
+            MathJax.typesetPromise().then(() => {
+                // console.log('MathJax rendering complete');
+            }).catch((err) => {
+                console.error('MathJax rendering error:', err);
+            });
+        }
+    }
+    document.addEventListener('astro:page-load', renderLatex);
+</script>
 
 
 <style>
