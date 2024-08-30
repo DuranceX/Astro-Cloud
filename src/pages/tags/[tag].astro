@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content'
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import PostCard from '@/components/PostCard.vue';
+import PostCard from '@/components/PostCard.astro';
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('posts');

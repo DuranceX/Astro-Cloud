@@ -1,0 +1,43 @@
+---
+import ColorfulTag from './ColorfulTag.astro';
+
+const { post } = Astro.props;
+const url = post.slug;
+const data = post.data;
+console.log('data',post)
+const description = data.description ? data.description : post.body.replaceAll(/[#`<>\[\]]/g,'').slice(0, 250);
+---
+
+<div class="w-full card-style my-5 text-[--font-color] hover:translate-y-[-12px] transition-transform duration-300 relative">
+    {data.image && (
+        <div class="w-full flex justify-center">
+            {/* name */}
+            <div class=" max-h-64 flex justify-center items-center mt-4 mx-4 rounded-2xl overflow-hidden ">
+                <img src={data.image.url} alt={data.image?.alt} class=" object-cover"/>
+            </div>
+        </div>
+    )}
+    <div class="px-10 pb-8 pt-6">
+        <!-- title-bar -->
+        <div class="relative font-bold text-3xl ">
+            <div class=" w-1 h-5 rounded-sm bg-[--primary] absolute top-2 left-[-10px]"></div>
+            <a class="line-clamp-2 lg:line-clamp-1 text-ellipsis hover:text-[--primary] transition-colors duration-300" href={'/posts/'+url}>{ data.title }</a>
+        </div>
+        <!-- extra-info  -->
+        <div class=" flex text-[--sub-font-color] py-1">
+            <div>{ data.date.toISOString().slice(0,10) }</div>
+        </div>
+        <!-- content -->
+        <div class=" my-4 line-clamp-3 text-ellipsis break-words">
+            { description }
+        </div>
+        <!-- tag-bar -->
+        <div class="flex flex-wrap">
+            {
+                data.tags.map((tag:string) => (
+                    <ColorfulTag tag={tag} />
+                ))
+            }
+        </div>
+    </div>
+</div>

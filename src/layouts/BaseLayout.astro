@@ -11,7 +11,6 @@ import { getTagColor,setTags } from "@/utils/tagColor"
 
 const config = Config.getConfig()
 const iconfont = config.iconfontUrl;
-console.log(iconfont)
 const { pageTitle } = Astro.props
 
 const posts = await getPosts();
@@ -36,7 +35,6 @@ setTags(colorfulTags)
 		<script is:inline>
 			const isDark = localStorage.getItem('theme') === 'dark';
 			const htmlElement = document.documentElement;
-			console.log(1231)
 			if(isDark){
 				htmlElement.classList.remove('light');
 				htmlElement.classList.add('dark');
