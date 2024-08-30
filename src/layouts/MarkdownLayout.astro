@@ -5,6 +5,10 @@ const data = post.data
 ---
 <html>
     <head><base target="_blank" /></head>
+    <script src="../src/store/mathjax-config.js" defer></script>
+    <script type="text/javascript" id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+    </script>
 </html>
 <div class="flex flex-col card-width card-style items-center py-16 mt-12 px-8" >
     <div class="flex flex-col items-start w-full max-w-[65ch]">
@@ -26,7 +30,9 @@ const data = post.data
     <!-- cover -->
     <div class=" my-8" style="max-width: 65ch">
         {data.image && (
-            <img src={data.image.url} alt={data.image?.alt} class=" object-cover rounded-2xl shadow-xl"/>
+            data.image.url.startsWith('src')
+                ? <img src={'..\\'+data.image.url} alt={data.image?.alt} class=" object-cover rounded-2xl shadow-xl"/>
+                : <img src={data.image.url} alt={data.image?.alt} class=" object-cover rounded-2xl shadow-xl"/>
         )}
     </div>
     <article class="prose dark:prose-invert w-full">

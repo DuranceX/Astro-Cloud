@@ -1,9 +1,9 @@
 ---
-title: '我的第四篇博客文章'
+title: '本地图片做封面'
 author: 'Astro 学习者'
 description: "这篇文章会自己出现在列表中！"
 image:
-  url: "https://docs.astro.build/default-og-image.png"
+  url: "src/content/attachment/local-cover.jpg"
   alt: "The word astro against an illustration of planets and stars."
 date: 2022-08-08
 tags: ["astro", "successes"]
