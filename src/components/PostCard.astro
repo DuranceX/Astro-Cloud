@@ -25,7 +25,15 @@ const description = data.description ? data.description : post.body.replaceAll(/
         <!-- title-bar -->
         <div class="relative font-bold text-3xl ">
             <div class=" w-1 h-5 rounded-sm bg-[--primary] absolute top-2 left-[-10px]"></div>
-            <a class="line-clamp-2 lg:line-clamp-1 text-ellipsis hover:text-[--primary] transition-colors duration-300" href={'/posts/'+url}>{ data.title }</a>
+            <a class="line-clamp-2 lg:line-clamp-1 text-ellipsis hover:text-[--primary] transition-colors duration-300" href={'/posts/'+url}>
+                { data.title }
+                { data.pinned && (
+                    <span class="text-[--sub-font-color] text-sm">
+                    <i class="iconfont icon-pin"></i>
+                        Pinned
+                    </span>
+                )}
+            </a>
         </div>
         <!-- extra-info  -->
         <div class=" flex text-[--sub-font-color] py-1">

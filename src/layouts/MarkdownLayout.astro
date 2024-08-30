@@ -1,6 +1,7 @@
 ---
 import ColorfulTag from "@/components/ColorfulTag.astro"
 import { getPosts } from "@/utils/collections"
+import { formateNumber } from "@/utils/utils"
 
 const { post } = Astro.props
 const data = post.data
@@ -18,6 +19,8 @@ const entry = posts.reduce((acc:any[], temp) => {
     })
     return acc;
 }, []);
+
+const wordCount = formateNumber(post.body.length)
 ---
 <html>
     <head><base target="_blank" /></head>
@@ -39,7 +42,7 @@ const entry = posts.reduce((acc:any[], temp) => {
         </div>
         <!-- words count and so on -->
         <div class=" mt-5 text-sm text-[--sub-font-color]">
-            This is a Line of Words Count
+            共计 {wordCount} words，预计阅读时间 {Math.ceil(post.body.length/200)} min
         </div>
     </div>
     <!-- cover -->
