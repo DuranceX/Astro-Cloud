@@ -5,6 +5,7 @@ const { post } = Astro.props;
 const url = post.slug;
 const data = post.data;
 const description = data.description ? data.description : post.body.replaceAll(/[#`<>\[\]]/g,'').slice(0, 250);
+const coverImg = data.image && data.image.url.startsWith('..') ? import(data.image) : data.image.url
 ---
 
 <div class="w-full card-style my-5 text-[--font-color] hover:translate-y-[-12px] transition-transform duration-300 relative">
@@ -14,7 +15,7 @@ const description = data.description ? data.description : post.body.replaceAll(/
             <div class=" max-h-64 flex justify-center items-center mt-4 mx-4 rounded-2xl overflow-hidden ">
                 {
                     data.image.url.startsWith('..')
-                    ? <img src={'../'+data.image.url} alt={data.image?.alt} class=" object-cover"/>
+                    ? <img src={coverImg.src} alt={data.image?.alt} class=" object-cover"/>
                     : <img src={data.image.url} alt={data.image?.alt} class=" object-cover"/>
                 }
             </div>
