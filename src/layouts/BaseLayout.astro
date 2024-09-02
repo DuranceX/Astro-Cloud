@@ -30,9 +30,10 @@ setTags(colorfulTags)
 		<meta name="viewport" content="width=device-width">
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="stylesheet" type="text/css" href={iconfont}>
-		<script src="../src/store/mathjax-config.js" defer></script>
+		<!-- <script src="../src/store/mathjax-config.js" defer></script> -->
 		<!-- Set the theme before the page is rendered to avoid a flash -->
 		<script is:inline>
+			import '@/store/mathjax-config.js';
 			const isDark = localStorage.getItem('theme') === 'dark';
 			const htmlElement = document.documentElement;
 			if(isDark){
