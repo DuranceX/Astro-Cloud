@@ -13,7 +13,7 @@ const description = data.description ? data.description : post.body.replaceAll(/
             {/* name */}
             <div class=" max-h-64 flex justify-center items-center mt-4 mx-4 rounded-2xl overflow-hidden ">
                 {
-                    data.image.url.startsWith('src')
+                    data.image.url.startsWith('..')
                     ? <img src={'..\\'+data.image.url} alt={data.image?.alt} class=" object-cover"/>
                     : <img src={data.image.url} alt={data.image?.alt} class=" object-cover"/>
                 }

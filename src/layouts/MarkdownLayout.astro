@@ -48,8 +48,8 @@ const wordCount = formateNumber(post.body.length)
     <!-- cover -->
     <div class=" my-8" style="max-width: 65ch">
         {data.image && (
-            data.image.url.startsWith('src')
-                ? <img src={'../'+data.image.url} alt={data.image?.alt} class=" object-cover rounded-2xl shadow-xl"/>
+            data.image.url.startsWith('..')
+                ? <img src={'..//'+data.image.url} alt={data.image?.alt} class=" object-cover rounded-2xl shadow-xl"/>
                 : <img src={data.image.url} alt={data.image?.alt} class=" object-cover rounded-2xl shadow-xl"/>
         )}
     </div>
@@ -59,7 +59,7 @@ const wordCount = formateNumber(post.body.length)
 </div>
 <div class=" card-width mt-4">
     {index > 0 && (
-        <a href={'../'+entry[index-1].slug} class=" float-left card-style py-6 px-6 w-2/5 hover:bg-[--paginator-item-hover-bg-color] hover:text-[--primary] transition-colors">
+        <a href={'../'+entry[index-1].slug} class="test float-left card-style py-6 px-6 w-2/5 hover:bg-[--paginator-item-hover-bg-color] hover:text-[--primary] transition-colors">
             <div class="flex items-center">
                 <i class="iconfont icon-left text-3xl"></i>{entry[index-1].title}
             </div>
