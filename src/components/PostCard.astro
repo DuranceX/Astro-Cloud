@@ -4,7 +4,6 @@ import ColorfulTag from './ColorfulTag.astro';
 const { post } = Astro.props;
 const url = post.slug;
 const data = post.data;
-console.log('data',post)
 const description = data.description ? data.description : post.body.replaceAll(/[#`<>\[\]]/g,'').slice(0, 250);
 ---
 

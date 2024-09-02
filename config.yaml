@@ -12,8 +12,8 @@ author: "Cardy"
 ## 360度: 红色，RGB:(255,  0,  0)
 primary_color: 200
 ## 封面图
-cover: "/public/cover.webp"
-logo: "/public/favicon.svg"
+cover: "/cover.webp"
+logo: "/favicon.svg"
 quote_card_content: "希望你今后的每一次笑，都是真心的。"
 quote_card_source: "-- 南河「深海」"
 iconfont_url: "//at.alicdn.com/t/c/font_4667994_u5x3jyeo57m.css"
