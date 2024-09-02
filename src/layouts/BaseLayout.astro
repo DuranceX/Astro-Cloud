@@ -33,7 +33,14 @@ setTags(colorfulTags)
 		<!-- <script src="../src/store/mathjax-config.js" defer></script> -->
 		<!-- Set the theme before the page is rendered to avoid a flash -->
 		<script is:inline>
-			import '@/store/mathjax-config.js';
+			window.MathJax = {
+				tex: {
+					inlineMath: [['$', '$'], ['\\(', '\\)']]
+				},
+				svg: {
+					fontCache: 'global'
+				}
+			};
 			const isDark = localStorage.getItem('theme') === 'dark';
 			const htmlElement = document.documentElement;
 			if(isDark){
