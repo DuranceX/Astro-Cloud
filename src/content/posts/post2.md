@@ -3,7 +3,7 @@ title: '本地图片做封面'
 author: 'Astro 学习者'
 description: "这篇文章会自己出现在列表中！"
 image:
-  url: "src/content/attachment/local-cover.jpg"
+  url: "../attachment/local-cover.jpg"
   alt: "The word astro against an illustration of planets and stars."
 date: 2022-08-08
 tags: ["astro", "successes"]
