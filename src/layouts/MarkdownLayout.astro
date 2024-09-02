@@ -49,7 +49,7 @@ const wordCount = formateNumber(post.body.length)
     <div class=" my-8" style="max-width: 65ch">
         {data.image && (
             data.image.url.startsWith('..')
-                ? <img src={'..//'+data.image.url} alt={data.image?.alt} class=" object-cover rounded-2xl shadow-xl"/>
+                ? <img src={'../'+data.image.url} alt={data.image?.alt} class=" object-cover rounded-2xl shadow-xl"/>
                 : <img src={data.image.url} alt={data.image?.alt} class=" object-cover rounded-2xl shadow-xl"/>
         )}
     </div>
