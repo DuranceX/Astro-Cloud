@@ -21,7 +21,17 @@ const entry = posts.reduce((acc:any[], temp) => {
 }, []);
 
 const wordCount = formateNumber(post.body.length)
-const coverImg = data.image && data.image.url.startsWith('..') ? import(data.image) : data.image.url
+let coverImg = {src:''}
+
+if (data.image?.url.startsWith('../')) {
+    // 将相对路径转换为从 src 目录开始的绝对路径
+    let imagePath = data.image.url.replace('../', '/src/content/')
+    console.log('imagePath: ', imagePath)
+    const imported = await import(/* @vite-ignore */ imagePath)
+    coverImg = imported.default
+} else {
+  coverImg = data.image?.url || ''
+}
 ---
 <html>
     <head><base target="_blank" /></head>

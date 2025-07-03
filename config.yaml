@@ -16,7 +16,7 @@ cover: "/cover.webp"
 logo: "/favicon.svg"
 quote_card_content: "希望你今后的每一次笑，都是真心的。"
 quote_card_source: "-- 南河「深海」"
-iconfont_url: "//at.alicdn.com/t/c/font_4667994_u5x3jyeo57m.css"
+iconfont_url: "//at.alicdn.com/t/c/font_4667994_9xxq6pvagei.css"
 page_size: 6
 
 
@@ -34,7 +34,7 @@ menu:
     url: "/about"
 
 # about
-avatar: "/public/cover.jpg"
+avatar: "/cover.webp"
 description: "一个简单的博客"
 ## name为名称，中文用完整拼音，全部小写
 social:
@@ -52,7 +52,7 @@ social:
 collections:
   - name: "GitHub仓库"
     url: "https://github.com/DuranceX/Astro-Cloud"
-    favicon: "public/favicon.svg"
+    favicon: "/favicon.svg"
     desc: "Cloud主题GitHub仓库"
   - name: "Placeholder"
     url: "/"

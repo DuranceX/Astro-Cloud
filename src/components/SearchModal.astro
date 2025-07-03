@@ -1,0 +1,130 @@
+---
+import { searchPosts, highlightSearchTerm, getContentSnippet } from '@/utils/search';
+const { show, onClose } = Astro.props;
+---
+{show && (
+  <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/40" style="backdrop-filter: blur(2px);" id="search-modal-bg">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg w-full max-w-xl p-8 relative" id="search-modal-content">
+      <button class="absolute -right-8 top-2 text-4xl text-white" aria-label="关闭" id="search-modal-close">&times;</button>
+      <input
+        type="text"
+        class="w-full p-2 border rounded mb-4 dark:bg-gray-700 dark:text-white"
+        placeholder="搜索文章标题、标签、内容..."
+        id="search-input"
+        autofocus
+      />
+      <div id="search-loading" class="text-center py-4" style="display:none;">搜索中...</div>
+      <div id="search-noresult" class="text-center py-4" style="display:none;">无结果</div>
+      <ul id="search-result-list"></ul>
+      <div class="flex justify-between items-center mt-4" id="search-pagination" style="display:none;">
+        <button id="search-prev" class="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700 disabled:opacity-50">上一页</button>
+        <span id="search-page-info" class="text-sm"></span>
+        <button id="search-next" class="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700 disabled:opacity-50">下一页</button>
+      </div>
+    </div>
+  </div>
+)}
+
+<script type="module">
+function initSearchModal() {
+  let query = '';
+  let allResults = [];
+  let page = 1;
+  const pageSize = 5;
+  let highlightSearchTerm, getContentSnippet, searchPosts;
+  const input = document.getElementById('search-input');
+  const resultList = document.getElementById('search-result-list');
+  const loadingDiv = document.getElementById('search-loading');
+  const noResultDiv = document.getElementById('search-noresult');
+  const pagination = document.getElementById('search-pagination');
+  const prevBtn = document.getElementById('search-prev');
+  const nextBtn = document.getElementById('search-next');
+  const pageInfo = document.getElementById('search-page-info');
+
+  function clearAll() {
+    query = '';
+    allResults = [];
+    page = 1;
+    if (input) input.value = '';
+    if (resultList) resultList.innerHTML = '';
+    if (loadingDiv) loadingDiv.style.display = 'none';
+    if (noResultDiv) noResultDiv.style.display = 'none';
+    if (pagination) pagination.style.display = 'none';
+  }
+
+  function renderPage() {
+    resultList.innerHTML = '';
+    if (allResults.length === 0) {
+      pagination.style.display = 'none';
+      return;
+    }
+    const totalPages = Math.ceil(allResults.length / pageSize);
+    const start = (page - 1) * pageSize;
+    const end = Math.min(start + pageSize, allResults.length);
+    allResults.slice(start, end).forEach(({ post, matchedFields }) => {
+      const li = document.createElement('li');
+      li.className = 'py-2 border-b last:border-b-0 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700';
+      li.innerHTML = `
+        <div class="font-bold" >${highlightSearchTerm(post.data.title, query)}</div>
+        <div class="text-sm mt-1">${highlightSearchTerm(getContentSnippet(post.body, query), query)}</div>
+      `;
+      li.onclick = () => { window.location.href = `/posts/${post.slug}`; };
+      resultList.appendChild(li);
+    });
+    pagination.style.display = totalPages > 1 ? '' : 'none';
+    prevBtn.disabled = page === 1;
+    nextBtn.disabled = page === totalPages;
+    pageInfo.textContent = `第 ${page} / ${totalPages} 页`;
+  }
+
+  if (input) {
+    input.oninput = async (e) => {
+      query = e.target.value.trim();
+      resultList.innerHTML = '';
+      page = 1;
+      allResults = [];
+      pagination.style.display = 'none';
+      if (!query) {
+        loadingDiv.style.display = 'none';
+        noResultDiv.style.display = 'none';
+        return;
+      }
+      loadingDiv.style.display = '';
+      noResultDiv.style.display = 'none';
+      ({ searchPosts, highlightSearchTerm, getContentSnippet } = await import('/src/utils/search.ts'));
+      allResults = await searchPosts(query);
+      loadingDiv.style.display = 'none';
+      if (allResults.length === 0) {
+        noResultDiv.style.display = '';
+        return;
+      }
+      renderPage();
+    };
+  }
+  if (prevBtn) {
+    prevBtn.onclick = () => {
+      if (page > 1) {
+        page--;
+        renderPage();
+      }
+    };
+  }
+  if (nextBtn) {
+    nextBtn.onclick = () => {
+      const totalPages = Math.ceil(allResults.length / pageSize);
+      if (page < totalPages) {
+        page++;
+        renderPage();
+      }
+    };
+  }
+  // 每次打开时 focus
+  if (input) setTimeout(() => input.focus(), 100);
+}
+
+// 只要模态框显示就初始化
+const modalBg = document.getElementById('search-modal-bg');
+if (modalBg && modalBg.style.display !== 'none') {
+  initSearchModal();
+}
+</script>

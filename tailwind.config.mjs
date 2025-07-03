@@ -5,6 +5,9 @@ export default {
 	darkMode: ['selector'],
 	theme: {
 		extend: {
+			fontSize:{
+				32: '2rem',
+			},
 			colors:{
 				red:{
 					night: '#ef44442e',
@@ -29,6 +32,10 @@ export default {
 				},
 				fuchsia:{
 					night: '#d946ef2e',
+				},
+				deepgray:{
+					light: '#424242ff',
+					night: '#ffffffff',
 				},
 			},
 			animation:{

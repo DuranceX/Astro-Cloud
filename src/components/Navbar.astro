@@ -2,6 +2,7 @@
 import HamburNavBar from './HamburNavBar.astro'
 import Config from '../store/config'
 import DarkmodeToggle from './DarkmodeToggle.astro'
+import SearchModal from './SearchModal.astro'
 
 const config = Config.getConfig()
 const links = config.menus
@@ -23,16 +24,22 @@ const sitename = config.sitename
             }
         </div>
         <div class="flex items-center absolute right-20">
-            <div class=" w-8 h-8 flex justify-center items-center" id="nav-theme">
+            <button class="w-8 h-8 flex justify-center items-center" id="nav-search-btn" aria-label="搜索" type="button">
+                <i class={"iconfont icon-sousuo2 text-32 text-deepgray-light dark:text-deepgray-night"}></i>
+            </button>
+            <div class=" w-8 h-8 flex justify-center items-center ml-4 pb-2" id="nav-theme">
                 <DarkmodeToggle />
             </div>
         </div>
+    </div>
+    <div id="search-modal-root" style="display:none;">
+      <SearchModal show={true} onClose={() => {}} />
     </div>
 </nav>
 
 <script>
     function bindHomeButton(){
-        const logo = document.getElementById('logo') as HTMLElement
+        const logo = document.getElementById('logo') as HTMLElement;
         logo.addEventListener('click', () => {
             window.location.href = '/'
         })
@@ -66,9 +73,43 @@ const sitename = config.sitename
             }
         });
     }
-
+    function bindSearchModal() {
+      const btn = document.getElementById('nav-search-btn') as HTMLElement;
+      const modal = document.getElementById('search-modal-root') as HTMLElement;
+      const modalBg = document.getElementById('search-modal-bg') as HTMLElement;
+      const closeBtn = document.getElementById('search-modal-close') as HTMLElement;
+      const input = document.getElementById('search-input') as HTMLInputElement;
+      
+      btn.addEventListener('click', () => {
+        modal.style.display = '';
+        setTimeout(() => {
+          const input = document.getElementById('search-input');
+          if(input) input.focus();
+        }, 100);
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          input.value = '';
+          modal.style.display = 'none';
+        }
+      });
+      if (modalBg) {
+        modalBg.addEventListener('click', (e) => {
+          if (e.target === modalBg) {
+            input.value = '';
+            modal.style.display = 'none';
+          }
+        });
+      };
+      if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+          modal.style.display = 'none';
+        });
+      }
+    }
     document.addEventListener('astro:page-load', () => {
         bindThemeToggle()
         bindHomeButton()
+        bindSearchModal()
     });
 </script>
