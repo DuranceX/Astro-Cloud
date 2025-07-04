@@ -1,5 +1,4 @@
 ---
-// import { searchPosts, highlightSearchTerm, getContentSnippet } from '@/utils/search';
 const { show, onClose } = Astro.props;
 ---
 <search-modal>
@@ -28,12 +27,12 @@ const { show, onClose } = Astro.props;
 </search-modal>
 
 <script type="module">
+import { searchPosts, highlightSearchTerm, getContentSnippet } from '/src/utils/search.ts'
 function initSearchModal() {
   let query = '';
   let allResults = [];
   let page = 1;
   const pageSize = 5;
-  let highlightSearchTerm, getContentSnippet, searchPosts;
   const input = document.getElementById('search-input');
   const resultList = document.getElementById('search-result-list');
   const loadingDiv = document.getElementById('search-loading');
@@ -93,7 +92,7 @@ function initSearchModal() {
       }
       loadingDiv.style.display = '';
       noResultDiv.style.display = 'none';
-      ({ searchPosts, highlightSearchTerm, getContentSnippet } = await import('/src/utils/search.ts'));
+      // ({ searchPosts, highlightSearchTerm, getContentSnippet } = await import('/src/utils/search.ts'));
       allResults = await searchPosts(query);
       loadingDiv.style.display = 'none';
       if (allResults.length === 0) {
