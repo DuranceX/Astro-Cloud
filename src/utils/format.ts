@@ -1,4 +1,4 @@
-export function formateDate(date: Date): {year: number, month: string, day: string} {
+export function formatDate(date: Date): {year: number, month: string, day: string} {
     const month = (date.getMonth() + 1)<10 ? '0'+(date.getMonth() + 1) : (date.getMonth() + 1);
     const day = date.getDate()<10 ? '0'+date.getDate() : date.getDate();
     return {
@@ -8,7 +8,7 @@ export function formateDate(date: Date): {year: number, month: string, day: stri
     }
 }
 
-export function formateNumber(num: number): string {
+export function formatNumber(num: number): string {
     if(num < 1000){
         return num.toString();
     }

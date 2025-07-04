@@ -1,18 +1,23 @@
 ---
 import ColorfulTag from './ColorfulTag.astro';
+import { localImages } from "@/utils/imageMap"
 
 const { post } = Astro.props;
 const url = post.slug;
 const data = post.data;
 const description = data.description ? data.description : post.body.replaceAll(/[#`<>\[\]]/g,'').slice(0, 250);
-let coverImg = {src:''}
 
-if (data.image?.url.startsWith('../')) {
-    // 将相对路径转换为从 src 目录开始的绝对路径
-    const imported = await import(/* @vite-ignore */ data.image.url)
-    coverImg = imported.default
+let coverImg = {
+  src: '',
+  alt: data.image?.alt || '',
+};
+
+// 判断是否是本地图片路径
+if (data.image?.url?.startsWith('../attachment/')) {
+  const pathKey = `../content/${data.image.url.replace('../', '')}`;
+  coverImg.src = localImages[pathKey].src || '';
 } else {
-  coverImg = data.image?.url || ''
+  coverImg.src = data.image?.url || '';
 }
 ---
 
@@ -22,9 +27,7 @@ if (data.image?.url.startsWith('../')) {
             {/* name */}
             <div class=" max-h-64 flex justify-center items-center mt-4 mx-4 rounded-2xl overflow-hidden ">
                 {
-                    data.image.url.startsWith('../')
-                    ? <img src={coverImg.src} alt={data.image?.alt} class=" object-cover"/>
-                    : <img src={data.image.url} alt={data.image?.alt} class=" object-cover"/>
+                    <img src={coverImg.src} alt={coverImg.alt} class=" object-cover"/>
                 }
             </div>
         </div>

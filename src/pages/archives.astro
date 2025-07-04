@@ -1,13 +1,13 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { getPosts } from '@/utils/collections';
-import { formateDate } from '@/utils/utils';
+import { formatDate } from '@/utils/format';
 
 const posts = await getPosts();
 const data = posts.map((post) => {
     return {
         title: post.data.title,
-        date: formateDate(post.data.date),
+        date: formatDate(post.data.date),
         url: post.slug
     }
 });

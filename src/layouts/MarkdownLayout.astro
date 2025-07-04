@@ -1,7 +1,8 @@
 ---
 import ColorfulTag from "@/components/ColorfulTag.astro"
 import { getPosts } from "@/utils/collections"
-import { formateNumber } from "@/utils/utils"
+import { formatNumber } from "@/utils/format"
+import { localImages } from "@/utils/imageMap"
 
 const { post } = Astro.props
 const data = post.data
@@ -20,14 +21,18 @@ const entry = posts.reduce((acc:any[], temp) => {
     return acc;
 }, []);
 
-const wordCount = formateNumber(post.body.length)
-let coverImg = {src:''}
+const wordCount = formatNumber(post.body.length)
+let coverImg = {
+  src: '',
+  alt: data.image?.alt || '',
+};
 
-if (data.image?.url.startsWith('../')) {
-    const imported = await import(/* @vite-ignore */ data.image.url)
-    coverImg = imported.default
+// 判断是否是本地图片路径
+if (data.image?.url?.startsWith('../attachment/')) {
+  const pathKey = `../content/${data.image.url.replace('../', '')}`;
+  coverImg.src = localImages[pathKey].src || '';
 } else {
-  coverImg = data.image?.url || ''
+  coverImg.src = data.image?.url || '';
 }
 ---
 <html>
@@ -56,9 +61,7 @@ if (data.image?.url.startsWith('../')) {
     <!-- cover -->
     <div class=" my-8" style="max-width: 65ch">
         {data.image && (
-            data.image.url.startsWith('..')
-                ? <img src={coverImg.src} alt={data.image?.alt} class=" object-cover rounded-2xl shadow-xl"/>
-                : <img src={data.image.url} alt={data.image?.alt} class=" object-cover rounded-2xl shadow-xl"/>
+            <img src={coverImg.src} alt={coverImg.alt} class=" object-cover"/>
         )}
     </div>
     <article class="prose dark:prose-invert w-full">
