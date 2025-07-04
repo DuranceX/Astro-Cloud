@@ -1,29 +1,31 @@
 ---
-import { searchPosts, highlightSearchTerm, getContentSnippet } from '@/utils/search';
+// import { searchPosts, highlightSearchTerm, getContentSnippet } from '@/utils/search';
 const { show, onClose } = Astro.props;
 ---
-{show && (
-  <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/40" style="backdrop-filter: blur(2px);" id="search-modal-bg">
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg w-full max-w-xl p-8 relative" id="search-modal-content">
-      <button class="absolute -right-8 top-2 text-4xl text-white" aria-label="关闭" id="search-modal-close">&times;</button>
-      <input
-        type="text"
-        class="w-full p-2 border rounded mb-4 dark:bg-gray-700 dark:text-white"
-        placeholder="搜索文章标题、标签、内容..."
-        id="search-input"
-        autofocus
-      />
-      <div id="search-loading" class="text-center py-4" style="display:none;">搜索中...</div>
-      <div id="search-noresult" class="text-center py-4" style="display:none;">无结果</div>
-      <ul id="search-result-list"></ul>
-      <div class="flex justify-between items-center mt-4" id="search-pagination" style="display:none;">
-        <button id="search-prev" class="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700 disabled:opacity-50">上一页</button>
-        <span id="search-page-info" class="text-sm"></span>
-        <button id="search-next" class="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700 disabled:opacity-50">下一页</button>
+<search-modal>
+  {show && (
+    <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/40" style="backdrop-filter: blur(2px);" id="search-modal-bg">
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg w-full max-w-xl p-8 relative" id="search-modal-content">
+        <button class="absolute -right-8 top-2 text-4xl text-white" aria-label="关闭" id="search-modal-close">&times;</button>
+        <input
+          type="text"
+          class="w-full p-2 border rounded mb-4 dark:bg-gray-700 dark:text-white"
+          placeholder="搜索文章标题、标签、内容..."
+          id="search-input"
+          autofocus
+        />
+        <div id="search-loading" class="text-center py-4" style="display:none;">搜索中...</div>
+        <div id="search-noresult" class="text-center py-4" style="display:none;">无结果</div>
+        <ul id="search-result-list"></ul>
+        <div class="flex justify-between items-center mt-4" id="search-pagination" style="display:none;">
+          <button id="search-prev" class="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700 disabled:opacity-50">上一页</button>
+          <span id="search-page-info" class="text-sm"></span>
+          <button id="search-next" class="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700 disabled:opacity-50">下一页</button>
+        </div>
       </div>
     </div>
-  </div>
-)}
+  )}
+</search-modal>
 
 <script type="module">
 function initSearchModal() {
@@ -122,9 +124,11 @@ function initSearchModal() {
   if (input) setTimeout(() => input.focus(), 100);
 }
 
-// 只要模态框显示就初始化
-const modalBg = document.getElementById('search-modal-bg');
-if (modalBg && modalBg.style.display !== 'none') {
-  initSearchModal();
+class SearchModal extends HTMLElement {
+  connectedCallback(){
+    initSearchModal();
+  }
 }
+
+customElements.define('search-modal', SearchModal);
 </script>
