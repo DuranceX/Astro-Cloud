@@ -4,7 +4,7 @@ const { show, onClose } = Astro.props;
 
 const posts = await getPosts();
 ---
-<search-modal data-posts={JSON.stringify(posts)} id="search-modal">
+<search-modal id="search-modal">
   {show && (
     <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/40" style="backdrop-filter: blur(2px);" id="search-modal-bg">
       <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg w-full max-w-xl p-8 relative flex flex-col max-h-4/5" id="search-modal-content">
@@ -29,7 +29,7 @@ const posts = await getPosts();
   )}
 </search-modal>
 
-<script type="module">
+<script type="module" define:vars={{posts}}>
 class SearchModal extends HTMLElement {
   connectedCallback(){
     async function searchPosts(query) {
@@ -39,7 +39,6 @@ class SearchModal extends HTMLElement {
 
       console.log('begin search:', query);
 
-      const posts = JSON.parse(document.getElementById('search-modal').dataset.posts);
       const results = [];
       const searchTerm = query.toLowerCase().trim();
 
