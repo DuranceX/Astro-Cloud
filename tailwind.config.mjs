@@ -8,6 +8,9 @@ export default {
 			fontSize:{
 				32: '2rem',
 			},
+			maxHeight:{
+				'4/5': '80%',
+			},
 			colors:{
 				red:{
 					night: '#ef44442e',

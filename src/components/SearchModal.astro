@@ -7,7 +7,7 @@ const posts = await getPosts();
 <search-modal data-posts={JSON.stringify(posts)} id="search-modal">
   {show && (
     <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/40" style="backdrop-filter: blur(2px);" id="search-modal-bg">
-      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg w-full max-w-xl p-8 relative" id="search-modal-content">
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg w-full max-w-xl p-8 relative flex flex-col max-h-4/5" id="search-modal-content">
         <button class="absolute -right-8 top-2 text-4xl text-white" aria-label="关闭" id="search-modal-close">&times;</button>
         <input
           type="text"
@@ -18,7 +18,7 @@ const posts = await getPosts();
         />
         <div id="search-loading" class="text-center py-4" style="display:none;">搜索中...</div>
         <div id="search-noresult" class="text-center py-4" style="display:none;">无结果</div>
-        <ul id="search-result-list"></ul>
+        <ul id="search-result-list" class="flex flex-col overflow-scroll"></ul>
         <div class="flex justify-between items-center mt-4" id="search-pagination" style="display:none;">
           <button id="search-prev" class="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700 disabled:opacity-50">上一页</button>
           <span id="search-page-info" class="text-sm"></span>

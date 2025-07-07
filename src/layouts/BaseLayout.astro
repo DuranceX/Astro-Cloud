@@ -1,25 +1,27 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
-import Config from '@/store/config';
+import { ViewTransitions } from "astro:transitions";
+import Config from "@/store/config";
 
-import Navbar from '@/components/Navbar.astro'
-import Footer from '@/components/Footer.astro';
-import GlobalStyles from '@/components/GlobalStyles.astro';
+import Navbar from "@/components/Navbar.astro";
+import Footer from "@/components/Footer.astro";
+import GlobalStyles from "@/components/GlobalStyles.astro";
+import SearchModal from "@/components/SearchModal.astro";
 
-import { getPosts } from "@/utils/collections"
-import { getTagColor,setTags } from "@/utils/tagColor"
+import { getPosts } from "@/utils/collections";
+import { getTagColor, setTags } from "@/utils/tagColor";
 
-const config = Config.getConfig()
+const config = Config.getConfig();
 const iconfont = config.iconfontUrl;
-const { pageTitle } = Astro.props
+const { pageTitle } = Astro.props;
 
 const posts = await getPosts();
-const tags = [...new Set(posts.map(entry => entry.data.tags).flat())];
-let colorfulTags:any = {}
-tags.forEach((tag,i) => {
-	colorfulTags[tag] = getTagColor()[i % (Object.keys(getTagColor()).length / 2)]
-})
-setTags(colorfulTags)
+const tags = [...new Set(posts.map((entry) => entry.data.tags).flat())];
+let colorfulTags: any = {};
+tags.forEach((tag, i) => {
+	colorfulTags[tag] =
+		getTagColor()[i % (Object.keys(getTagColor()).length / 2)];
+});
+setTags(colorfulTags);
 ---
 
 <!doctype html>
@@ -27,44 +29,86 @@ setTags(colorfulTags)
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width">
+		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="stylesheet" type="text/css" href={iconfont}>
+		<link rel="stylesheet" type="text/css" href={iconfont} />
 		<!-- <script src="../src/store/mathjax-config.js" defer></script> -->
 		<!-- Set the theme before the page is rendered to avoid a flash -->
 		<script is:inline>
 			window.MathJax = {
 				tex: {
-					inlineMath: [['$', '$'], ['\\(', '\\)']]
+					inlineMath: [
+						["$", "$"],
+						["\\(", "\\)"],
+					],
 				},
 				svg: {
-					fontCache: 'global'
-				}
+					fontCache: "global",
+				},
 			};
-			const isDark = localStorage.getItem('theme') === 'dark';
+			const isDark = localStorage.getItem("theme") === "dark";
 			const htmlElement = document.documentElement;
-			if(isDark){
-				htmlElement.classList.remove('light');
-				htmlElement.classList.add('dark');
-			}else{
-				htmlElement.classList.remove('dark');
-				htmlElement.classList.add('light');
+			if (isDark) {
+				htmlElement.classList.remove("light");
+				htmlElement.classList.add("dark");
+			} else {
+				htmlElement.classList.remove("dark");
+				htmlElement.classList.add("light");
 			}
 		</script>
 		<meta name="generator" content={Astro.generator} />
-        <title>{pageTitle}</title>
+		<title>{pageTitle}</title>
 		<ViewTransitions />
 	</head>
 	<body>
-        <Navbar />
+		<Navbar />
 		<div class="flex flex-col justify-center items-center pt-16">
 			<slot />
 		</div>
-        <Footer />
-        <GlobalStyles />
+		<Footer />
+		<GlobalStyles />
+		<div id="search-modal-root" style="display:none;">
+			<SearchModal show={true} onClose={() => {}} />
+		</div>
 	</body>
+	<script>
+		function bindSearchModal() {
+			const modal = document.getElementById(
+				"search-modal-root",
+			) as HTMLElement;
+			const modalBg = document.getElementById(
+				"search-modal-bg",
+			) as HTMLElement;
+			const closeBtn = document.getElementById(
+				"search-modal-close",
+			) as HTMLElement;
+			const input = document.getElementById(
+				"search-input",
+			) as HTMLInputElement;
+			document.addEventListener("keydown", (e) => {
+				if (e.key === "Escape") {
+					input.value = "";
+					modal.style.display = "none";
+				}
+			});
+			if (modalBg) {
+				modalBg.addEventListener("click", (e) => {
+					if (e.target === modalBg) {
+						input.value = "";
+						modal.style.display = "none";
+					}
+				});
+			}
+			if (closeBtn) {
+				closeBtn.addEventListener("click", () => {
+					modal.style.display = "none";
+				});
+			}
+		}
+		document.addEventListener("astro:page-load", () => {
+			bindSearchModal();
+		});
+	</script>
 </html>
 
-<style is:global> 
-
-</style>
+<style is:global></style>

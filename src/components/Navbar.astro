@@ -2,7 +2,6 @@
 import HamburNavBar from './HamburNavBar.astro'
 import Config from '../store/config'
 import DarkmodeToggle from './DarkmodeToggle.astro'
-import SearchModal from './SearchModal.astro'
 
 const config = Config.getConfig()
 const links = config.menus
@@ -31,9 +30,6 @@ const sitename = config.sitename
                 <DarkmodeToggle />
             </div>
         </div>
-    </div>
-    <div id="search-modal-root" style="display:none;">
-      <SearchModal show={true} onClose={() => {}} />
     </div>
 </nav>
 
@@ -76,9 +72,6 @@ const sitename = config.sitename
     function bindSearchModal() {
       const btn = document.getElementById('nav-search-btn') as HTMLElement;
       const modal = document.getElementById('search-modal-root') as HTMLElement;
-      const modalBg = document.getElementById('search-modal-bg') as HTMLElement;
-      const closeBtn = document.getElementById('search-modal-close') as HTMLElement;
-      const input = document.getElementById('search-input') as HTMLInputElement;
       
       btn.addEventListener('click', () => {
         modal.style.display = '';
@@ -87,25 +80,6 @@ const sitename = config.sitename
           if(input) input.focus();
         }, 100);
       });
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          input.value = '';
-          modal.style.display = 'none';
-        }
-      });
-      if (modalBg) {
-        modalBg.addEventListener('click', (e) => {
-          if (e.target === modalBg) {
-            input.value = '';
-            modal.style.display = 'none';
-          }
-        });
-      };
-      if (closeBtn) {
-        closeBtn.addEventListener('click', () => {
-          modal.style.display = 'none';
-        });
-      }
     }
     document.addEventListener('astro:page-load', () => {
         bindThemeToggle()

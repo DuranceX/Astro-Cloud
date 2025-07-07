@@ -16,7 +16,10 @@ const sitename = config.sitename
                 <span class="text-xl">{sitename}</span>
             </div>
             <div class="flex items-center">
-                <div class=" w-8 h-8 flex justify-center items-center" id="ham-theme">
+                <button class="w-8 h-8 flex justify-center items-center" id="nav-search-btn_hambur" aria-label="搜索" type="button">
+                    <i class={"iconfont icon-sousuo2 text-32 text-deepgray-light dark:text-deepgray-night"}></i>
+                </button>
+                <div class=" w-8 h-8 flex justify-center items-center ml-2 pb-2" id="ham-theme">
                     <DarkmodeToggle />
                 </div>
                 <div class="hamburger ml-3 mt-1" id="hamburger">
@@ -91,11 +94,24 @@ function bindThemeToggle() {
             }
         });
     }
+    function bindSearchModal() {
+      const btn = document.getElementById('nav-search-btn_hambur') as HTMLElement;
+      const modal = document.getElementById('search-modal-root') as HTMLElement;
+      
+      btn.addEventListener('click', () => {
+        modal.style.display = '';
+        setTimeout(() => {
+          const input = document.getElementById('search-input');
+          if(input) input.focus();
+        }, 100);
+      });
+    }
 
 document.addEventListener('astro:page-load', () => {
     bindMenuButton()
     bindHomeButton()
     bindThemeToggle()
+    bindSearchModal()
 })
 </script>
 
