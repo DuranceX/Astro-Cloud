@@ -1,8 +1,7 @@
 ---
 title: 'Code Test'
-author: '初言'
 date: 2022-07-28
-tags: ["blogging"]
+tags: ["测试"]
 image: 
     url: 'https://docs.astro.build/assets/rose.webp'
     alt: 'The Astro logo on a dark background with a pink glow.'
