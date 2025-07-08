@@ -1,4 +1,28 @@
-## Astro-Cloud
+# Astro-Cloud
+
+![](https://images.starnight.top/img/astro-demo.starnight.top-Home-cvscreenshot.png)
+
+## How-to-start
+
+1. clone this repo
+``` shell
+git clone https://github.com/DuranceX/Astro-Cloud.git
+```
+
+2. install dependencies
+```shell
+cd Astro-cloud
+npm install
+```
+
+3. Content
+
+put your posts in `src/content/posts` and attachments in `src/content/attachment`
+
+4. Customize
+
+Customize your website by editing the `config.yaml`
+
 
 ## TODO
 
