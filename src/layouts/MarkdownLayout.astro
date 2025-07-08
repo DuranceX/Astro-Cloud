@@ -70,14 +70,14 @@ if (data.image?.url?.startsWith('../attachment/')) {
 </div>
 <div class=" card-width mt-4">
     {index > 0 && (
-        <a href={'../posts/'+entry[index-1].slug} class="test float-left card-style py-6 px-6 w-2/5 hover:bg-[--paginator-item-hover-bg-color] hover:text-[--primary] transition-colors">
+        <a href={'../'+entry[index-1].slug} class="test float-left card-style py-6 px-6 w-2/5 hover:bg-[--paginator-item-hover-bg-color] hover:text-[--primary] transition-colors">
             <div class="flex items-center">
                 <i class="iconfont icon-left text-3xl"></i>{entry[index-1].title}
             </div>
         </a>
     )}
     {index < entry.length-1 && (
-        <a href={'../posts/'+entry[index+1].slug} class=" float-right card-style py-6 px-6 w-2/5 hover:bg-[--paginator-item-hover-bg-color] hover:text-[--primary] transition-colors">
+        <a href={'../'+entry[index+1].slug} class=" float-right card-style py-6 px-6 w-2/5 hover:bg-[--paginator-item-hover-bg-color] hover:text-[--primary] transition-colors">
             <div class="flex items-center justify-end">
                 {entry[index+1].title}
                 <i class="iconfont icon-right text-3xl"></i>
