@@ -36,7 +36,10 @@ export function useGithubApi(owner: string, repo: string) {
   }
 
   async function commitConfig(yamlContent: string, sha: string): Promise<void> {
-    const encoded = btoa(unescape(encodeURIComponent(yamlContent)))
+    const bytes = new TextEncoder().encode(yamlContent)
+    let binary = ''
+    bytes.forEach(b => (binary += String.fromCharCode(b)))
+    const encoded = btoa(binary)
     const res = await fetch(
       `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/config.yaml`,
       {
