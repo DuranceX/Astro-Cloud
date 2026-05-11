@@ -6,6 +6,8 @@ export interface GithubFileResult {
 }
 
 export function useGithubApi(owner: string, repo: string) {
+  // Token 存储在 localStorage，可被同源 JS 读取。
+  // 建议使用最小权限 token（仅 contents:write 单仓库）以降低泄露风险。
   const token = ref<string>(localStorage.getItem('admin_github_token') ?? '')
 
   function saveToken(t: string) {
@@ -20,19 +22,23 @@ export function useGithubApi(owner: string, repo: string) {
 
   async function fetchConfig(): Promise<GithubFileResult> {
     const res = await fetch(
-      `https://api.github.com/repos/${owner}/${repo}/contents/config.yaml`,
+      `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/config.yaml`,
       { headers: { Authorization: `Bearer ${token.value}`, Accept: 'application/vnd.github+json' } }
     )
     if (!res.ok) throw new Error(`GitHub API error: ${res.status} ${res.statusText}`)
     const data = await res.json()
-    const content = atob(data.content.replace(/\n/g, ''))
+    if (typeof data.content !== 'string' || typeof data.sha !== 'string') {
+      throw new Error('Unexpected GitHub API response shape')
+    }
+    const bytes = Uint8Array.from(atob(data.content.replace(/\n/g, '')), c => c.charCodeAt(0))
+    const content = new TextDecoder().decode(bytes)
     return { content, sha: data.sha }
   }
 
   async function commitConfig(yamlContent: string, sha: string): Promise<void> {
     const encoded = btoa(unescape(encodeURIComponent(yamlContent)))
     const res = await fetch(
-      `https://api.github.com/repos/${owner}/${repo}/contents/config.yaml`,
+      `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/config.yaml`,
       {
         method: 'PUT',
         headers: {
