@@ -15,19 +15,14 @@ const sitename = config.sitename
                 <img class="w-10 h-10 mr-2" src={logo} alt="logo">
                 <span class="text-xl">{sitename}</span>
             </div>
-            <div class="flex items-center">
-                <button class="w-8 h-8 flex justify-center items-center text-deepgray-light dark:text-deepgray-night hover:text-[--primary] transition-colors" id="nav-admin-btn_hambur" aria-label="博客设置" type="button" title="博客设置">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                      <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-                    </svg>
-                </button>
+            <div class="flex items-center gap-3">
                 <button class="w-8 h-8 flex justify-center items-center" id="nav-search-btn_hambur" aria-label="搜索" type="button">
                     <i class={"iconfont icon-sousuo2 text-32 text-deepgray-light dark:text-deepgray-night"}></i>
                 </button>
-                <div class=" w-8 h-8 flex justify-center items-center ml-2 pb-2" id="ham-theme">
+                <div class="w-8 h-8 flex justify-center items-center" id="ham-theme">
                     <DarkmodeToggle />
                 </div>
-                <div class="hamburger ml-3 mt-1" id="hamburger">
+                <div class="hamburger mt-1" id="hamburger">
                     <span class="line"></span>
                     <span class="line"></span>
                     <span class="line"></span>
@@ -99,12 +94,6 @@ function bindThemeToggle() {
             }
         });
     }
-    function bindAdminModal() {
-      const btn = document.getElementById('nav-admin-btn_hambur') as HTMLElement;
-      btn.addEventListener('click', () => {
-        window.dispatchEvent(new CustomEvent('open-admin-modal'));
-      });
-    }
     function bindSearchModal() {
       const btn = document.getElementById('nav-search-btn_hambur') as HTMLElement;
       const modal = document.getElementById('search-modal-root') as HTMLElement;
@@ -122,7 +111,6 @@ document.addEventListener('astro:page-load', () => {
     bindMenuButton()
     bindHomeButton()
     bindThemeToggle()
-    bindAdminModal()
     bindSearchModal()
 })
 </script>

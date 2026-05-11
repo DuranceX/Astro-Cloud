@@ -56,9 +56,12 @@ const id = Math.random().toString(36).substring(2, 9)
 }
 
 .theme-switch-wrapper {
-  width: 16px;
-  height: 16px;
+  width: 32px;
+  height: 32px;
   margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .theme-switch {
@@ -111,7 +114,7 @@ const id = Math.random().toString(36).substring(2, 9)
 	> .theme-switch
 	> .slider {
 	background-color: var(--font-color);
-	transform: rotateZ(-45deg);
+	transform: rotateZ(-45deg) scale(1.4);
 }
 
 [type='checkbox']:checked
