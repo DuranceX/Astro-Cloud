@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar.astro";
 import Footer from "@/components/Footer.astro";
 import GlobalStyles from "@/components/GlobalStyles.astro";
 import SearchModal from "@/components/SearchModal.astro";
+import AdminModalRoot from "@/components/admin/AdminModalRoot.vue";
 
 import { getPosts } from "@/utils/collections";
 import { getTagColor, setTags } from "@/utils/tagColor";
@@ -22,6 +23,9 @@ tags.forEach((tag, i) => {
 		getTagColor()[i % (Object.keys(getTagColor()).length / 2)];
 });
 setTags(colorfulTags);
+
+const owner = import.meta.env.PUBLIC_GITHUB_OWNER ?? '';
+const repo = import.meta.env.PUBLIC_GITHUB_REPO ?? '';
 ---
 
 <!doctype html>
@@ -74,6 +78,7 @@ setTags(colorfulTags);
 		<div id="search-modal-root" style="display:none;">
 			<SearchModal show={true} onClose={() => {}} />
 		</div>
+		<AdminModalRoot client:only="vue" owner={owner} repo={repo} />
 	</body>
 	<script>
 		function bindSearchModal() {

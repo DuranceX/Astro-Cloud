@@ -5,7 +5,8 @@ import { useGithubApi } from './useGithubApi'
 import { useConfig } from './useConfig'
 import SortableList from './SortableList.vue'
 
-const props = defineProps<{ owner: string; repo: string }>()
+const props = defineProps<{ owner: string; repo: string; show: boolean }>()
+const emit = defineEmits<{ close: [] }>()
 
 const { token, saveToken, clearToken, fetchConfig, commitConfig } = useGithubApi(props.owner, props.repo)
 const { current, sha, isDirty, loadFromYaml, serializeToYaml, markSaved } = useConfig()
@@ -47,7 +48,10 @@ async function handleSave() {
     await commitConfig(yamlStr, sha.value)
     markSaved()
     successMsg.value = '已提交，等待 GitHub Actions 构建...'
-    setTimeout(() => { successMsg.value = '' }, 4000)
+    setTimeout(() => {
+      successMsg.value = ''
+      emit('close')
+    }, 2000)
   } catch (e: any) {
     error.value = e.message
   } finally {
@@ -87,7 +91,14 @@ const collectionEmpty = { name: '', url: '', favicon: '', desc: '' }
 </script>
 
 <template>
-  <div class="min-h-[600px] bg-[--card-background-color] rounded-2xl shadow-sm overflow-hidden">
+  <Teleport to="body">
+    <div
+      v-if="show"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
+      style="backdrop-filter: blur(2px);"
+      @click.self="emit('close')"
+    >
+      <div class="w-full max-w-3xl mx-4 min-h-[560px] max-h-[85vh] flex flex-col bg-[--card-background-color] rounded-2xl shadow-xl overflow-hidden">
 
     <!-- 环境变量未配置提示 -->
     <div v-if="missingEnv" class="flex flex-col items-center justify-center h-96 gap-3 text-[--sub-font-color]">
@@ -100,28 +111,49 @@ const collectionEmpty = { name: '', url: '', favicon: '', desc: '' }
       <div class="flex items-center justify-between px-6 py-4 border-b border-[--sub-font-color]/20">
         <h1 class="text-xl font-bold text-[--font-color]">博客设置</h1>
         <div class="flex items-center gap-3">
-          <span v-if="successMsg" class="text-sm text-green-500">{{ successMsg }}</span>
           <span v-if="error" class="text-sm text-red-500 max-w-xs truncate" :title="error">{{ error }}</span>
           <button
             @click="showTokenModal = true"
             class="w-8 h-8 flex items-center justify-center text-[--sub-font-color] hover:text-[--primary] transition-colors"
             title="GitHub Token 设置"
-          >⚙</button>
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="7.5" cy="15.5" r="5.5"/>
+              <path d="M21 2l-9.6 9.6"/>
+              <path d="M15.5 7.5l3 3L22 7l-3-3"/>
+            </svg>
+          </button>
           <button
             @click="handleSave"
             :disabled="!isDirty || saving"
-            class="px-4 py-1.5 text-sm rounded-lg transition-colors"
+            class="px-4 py-1.5 text-sm rounded-lg border transition-colors"
             :class="isDirty && !saving
-              ? 'bg-[--primary] text-white hover:opacity-90 cursor-pointer'
-              : 'bg-[--sub-font-color]/20 text-[--sub-font-color] cursor-not-allowed'"
+              ? 'bg-[--primary] border-[--primary] text-white hover:opacity-90 cursor-pointer'
+              : 'bg-transparent border-[--sub-font-color]/30 text-[--sub-font-color]/50 cursor-not-allowed'"
           >
             {{ saving ? '提交中...' : '保存并提交' }}
           </button>
+          <button
+            @click="emit('close')"
+            class="w-8 h-8 flex items-center justify-center text-[--sub-font-color] hover:text-[--font-color] transition-colors text-xl leading-none"
+            title="关闭"
+          >×</button>
         </div>
       </div>
 
       <!-- 主体 -->
-      <div class="flex" style="min-height: 540px;">
+      <div class="flex flex-1 overflow-hidden relative">
+
+        <!-- 提交成功遮罩 -->
+        <div
+          v-if="successMsg"
+          class="absolute inset-0 z-10 flex flex-col items-center justify-center bg-[--card-background-color]/90 gap-3"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-green-500">
+            <circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/>
+          </svg>
+          <p class="text-base font-medium text-[--font-color]">{{ successMsg }}</p>
+        </div>
 
         <!-- 左侧导航 -->
         <div class="w-40 flex-shrink-0 border-r border-[--sub-font-color]/20 py-4">
@@ -261,5 +293,7 @@ const collectionEmpty = { name: '', url: '', favicon: '', desc: '' }
       </div>
     </template>
 
-  </div>
+      </div>
+    </div>
+  </Teleport>
 </template>
