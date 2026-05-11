@@ -41,8 +41,8 @@ if (data.image?.url?.startsWith('../attachment/')) {
         src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
     </script>
 </html>
-<div class="flex flex-col card-width card-style items-center py-16 mt-12 px-8" >
-    <div class="flex flex-col items-start w-full max-w-[65ch]">
+<div class="flex flex-col card-width max-w-4xl card-style items-center py-16 mt-12 px-12 xl:px-20" >
+    <div class="flex flex-col items-start w-full">
         <!-- tags -->
         <div class="flex flex-wrap">
             {data.tags.map((tag:string) => (
@@ -59,16 +59,16 @@ if (data.image?.url?.startsWith('../attachment/')) {
         </div>
     </div>
     <!-- cover -->
-    <div class=" my-8" style="max-width: 65ch">
+    <div class=" my-8 w-full">
         {data.image && (
             <img src={coverImg.src} alt={coverImg.alt} class=" object-cover"/>
         )}
     </div>
-    <article class="prose dark:prose-invert w-full">
+    <article class="prose dark:prose-invert w-full max-w-none">
         <slot />
     </article>
 </div>
-<div class=" card-width mt-4">
+<div class="card-width max-w-4xl mt-4">
     {index > 0 && (
         <a href={'../'+entry[index-1].slug} class="test float-left card-style py-6 px-6 w-2/5 hover:bg-[--paginator-item-hover-bg-color] hover:text-[--primary] transition-colors">
             <div class="flex items-center">
