@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AdminPanel from '@/components/admin/AdminPanel.vue';
+
+const owner = import.meta.env.PUBLIC_GITHUB_OWNER ?? '';
+const repo = import.meta.env.PUBLIC_GITHUB_REPO ?? '';
+---
+
+<BaseLayout pageTitle="博客设置">
+  <div class="card-width mt-12 mb-12 w-full">
+    <AdminPanel client:only="vue" owner={owner} repo={repo} />
+  </div>
+</BaseLayout>
