@@ -1,76 +1,56 @@
-# base
-sitename: "Cloud Demo"
-author: "Cardy"
-## 色相值，0-360 
-## 参考值
-## 　0度: 红色，RGB:(255,  0,  0)
-##  60度: 黄色，RGB:(255,255,  0)
-## 120度: 绿色，RGB:(  0,255,  0)
-## 180度: 青色，RGB:(  0,255,255)
-## 240度: 蓝色，RGB:(  0,  0,255)
-## 300度: 紫色，RGB:(255,  0,255)
-## 360度: 红色，RGB:(255,  0,  0)
+sitename: Cloud Demo
+author: Cardy
 primary_color: 200
-## 封面图
-cover: "/cover.webp"
-logo: "/favicon.svg"
-quote_card_content: "希望你今后的每一次笑，都是真心的。"
-quote_card_source: "-- 南河「深海」"
-iconfont_url: "//at.alicdn.com/t/c/font_4667994_9xxq6pvagei.css"
+cover: /cover.webp
+logo: /favicon.svg
+quote_card_content: 希望你今后的每一次笑，都是真心的。
+quote_card_source: '-- 南河「深海」'
+iconfont_url: //at.alicdn.com/t/c/font_4667994_9xxq6pvagei.css
 page_size: 6
-
-
-# menu
 menu:
-  - name: "首页"
-    url: "/"
-  - name: "归档"
-    url: "/archives"
-  - name: "标签"
-    url: "/tags"
-  - name: "收藏"
-    url: "/collections"
-  - name: "关于"
-    url: "/about"
-
-# about
-avatar: "/cover.webp"
-description: "一个简单的博客"
-## name为名称，中文用完整拼音，全部小写
+  - name: 首页
+    url: /
+  - name: 归档
+    url: /archives
+  - name: 标签
+    url: /tags
+  - name: 收藏
+    url: /collections
+  - name: 关于
+    url: /about
+avatar: /cover.webp
+description: 一个简单的博客
 social:
-  - name: "github"
-    url: "https://github.com/DuranceX"
-  - name: "zhihu"
-    url: "https://www.zhihu.com/"
-  - name: "weibo"
-    url: "https://www.weibo.com/"
-  - name: "twitch"
-    url: "https://www.twitch.com/"
-  
-
-# collections
+  - name: github
+    url: https://github.com/DuranceX
+  - name: zhihu
+    url: https://www.zhihu.com/
+  - name: weibo
+    url: https://www.weibo.com/
+  - name: twitch
+    url: https://www.twitch.com/
 collections:
-  - name: "GitHub仓库"
-    url: "https://github.com/DuranceX/Astro-Cloud"
-    favicon: "/favicon.svg"
-    desc: "Cloud主题GitHub仓库"
-  - name: "Placeholder"
-    url: "/"
-    favicon: "https://img95.699pic.com/photo/60017/2391.jpg_wh860.jpg"
-    desc: "这是一个长长长长长长长长长长长长长长长长长长长长的描述"
-  - name: "Placeholder"
-    url: "/"
-    favicon: "https://img95.699pic.com/photo/60017/2391.jpg_wh860.jpg"
-    desc: "这是一个长长长长长长长长长长长长长长长长长长长长的描述"
-  - name: "Placeholder"
-    url: "/"
-    favicon: "https://img95.699pic.com/photo/60017/2391.jpg_wh860.jpg"
-    desc: "这是一个长长长长长长长长长长长长长长长长长长长长的描述"
-  - name: "Placeholder"
-    url: "/"
-    favicon: "https://img95.699pic.com/photo/60017/2391.jpg_wh860.jpg"
-    desc: "这是一个长长长长长长长长长长长长长长长长长长长长的描述"
-  - name: "Placeholder"
-    url: "/"
-    favicon: "https://img95.699pic.com/photo/60017/2391.jpg_wh860.jpg"
-    desc: "这是一个长长长长长长长长长长长长长长长长长长长长的描述"
+  - name: GitHub仓库
+    url: https://github.com/DuranceX/Astro-Cloud
+    favicon: /favicon.svg
+    desc: Cloud主题GitHub仓库
+  - name: Placeholder111
+    url: /
+    favicon: https://img95.699pic.com/photo/60017/2391.jpg_wh860.jpg
+    desc: 这是一个长长长长长长长长长长长长长长长长长长长长的描述
+  - name: Placeholder222
+    url: /
+    favicon: https://img95.699pic.com/photo/60017/2391.jpg_wh860.jpg
+    desc: 这是一个长长长长长长长长长长长长长长长长长长长长的描述
+  - name: Placeholder333
+    url: /
+    favicon: https://img95.699pic.com/photo/60017/2391.jpg_wh860.jpg
+    desc: 这是一个长长长长长长长长长长长长长长长长长长长长的描述
+  - name: Placeholder
+    url: /
+    favicon: https://img95.699pic.com/photo/60017/2391.jpg_wh860.jpg
+    desc: 这是一个长长长长长长长长长长长长长长长长长长长长的描述
+  - name: Placeholder
+    url: /
+    favicon: https://img95.699pic.com/photo/60017/2391.jpg_wh860.jpg
+    desc: 这是一个长长长长长长长长长长长长长长长长长长长长的描述
